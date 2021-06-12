@@ -1,0 +1,282 @@
+<h4 class="font-weight-bold py-3 mb-4">
+    Dashboard
+    <div class="text-muted text-tiny mt-1"><small class="font-weight-normal">Today is Tuesday, 8 February 2018</small></div>
+  </h4>
+  
+  <!-- Counters -->
+  <div class="row">
+    <div class="col-sm-6 col-xl-4">
+  
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="lnr lnr-earth display-4 text-info"></div>
+            <div class="ml-3">
+              <div class="text-muted small">Rate</div>
+              <div class="text-large text-right">
+                <i class="ion ion-ios-trending-up"></i> 1% <small class="text-small">/ day</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+    <div class="col-sm-6 col-xl-4">
+  
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="lnr lnr-gift display-4 text-danger"></div>
+            <div class="ml-3">
+              <div class="text-muted small">Deposit</div>
+              <div class="text-large">98</div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+    <div class="col-sm-6 col-xl-4">
+  
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="lnr lnr-users display-4 text-warning"></div>
+            <div class="ml-3">
+              <div class="text-muted small">Withdrawal</div>
+              <div class="text-large">5</div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-6 col-xl-4">
+  
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="lnr lnr-earth display-4 text-info"></div>
+            <div class="ml-3 w-100">
+              <div class="small">Interest revenue</div>
+              <div class="text-large mt-3">
+                <ng-container *ngIf="member != null; else elseMemberNullAmountTemplate">
+                  <h2>{{ member.interest_account.amount }} $</h2>
+                </ng-container>
+                <ng-template #elseMemberNullAmountTemplate>
+                  <h2>0 $</h2>
+                </ng-template>                
+              </div>
+              <div class="text-large mt-3 w-100 text-right">
+                <button class="btn btn-outline-success">Merge</button>
+                <button class="btn btn-outline-danger">Withdrawl</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+    <div class="col-sm-6 col-xl-4">
+  
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="lnr lnr-gift display-4 text-danger"></div>
+            <div class="ml-3 w-100">
+              <div class="small">Sponsorship revenue</div>
+              <div class="text-large mt-3">
+                <h2>0 $</h2>
+              </div>
+              <div class="text-large mt-3 w-100 text-right">
+                <button class="btn btn-outline-success">Merge</button>
+                <button class="btn btn-outline-danger">Withdrawl</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+
+    <div class="col-sm-6 col-xl-4">
+  
+      <div class="card mb-4  bg-danger text-white">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="lnr lnr-gift display-4 text-danger"></div>
+            <div class="ml-3 w-100">
+              <div class="small">Total revenue</div>
+              <div class="text-large mt-3" style="display: flex; flex-direction: row; justify-content: space-between">
+                <h2>{{ totalProfit }} $</h2>
+              </div>
+              <div class="text-large mt-3 w-100 text-right">
+                <button class="btn btn-outline-danger"></button>
+                <button class="btn btn-outline-danger"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+    
+  </div>
+
+
+
+
+
+  <div class="row">
+    <div class="col-sm-6 col-xl-4">
+  
+      <div class="card mb-4 bg-success text-white">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="lnr lnr-earth display-4 text-info"></div>
+            <div class="ml-3">
+              <div class="small">Real amount</div>
+              <div class="text-large mt-3">
+                <h2>{{ realAmount }} $</h2></div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+    
+    <div class="col-sm-6 col-xl-4">
+  
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="lnr lnr-earth display-4 text-info"></div>
+            <div class="ml-3 w-100">
+              <div class="small">Profit</div>
+              <div class="text-large mt-3" style="display: flex; flex-direction: row; justify-content: space-between">
+                <h2>{{ totalProfit }} $</h2>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+
+    <div class="col-sm-6 col-xl-4">
+  
+      <div class="card mb-4 bg-primary text-white">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="lnr lnr-earth display-4 text-info"></div>
+            <div class="ml-3">
+              <div class="small">Total amount</div>
+              <div class="text-large mt-3">
+                <h2>{{ totalAmount }} $</h2></div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+
+  </div>
+
+
+  <!-- / Interest payment and benefits history -->
+  <h4 class="font-weight-bold py-3 mb-4">
+    Interest rate payment
+    <div class="text-muted text-tiny mt-1"><small class="font-weight-normal">You are is increased by 3% each month</small></div>
+  </h4>
+  <div class="row mt-3">
+    <div class="col-md-12">
+
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <table class="table mt-2">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Due date</th>
+                  <th>Amount before</th>
+                  <th>Amount</th>
+                  <th>Amount After</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+
+
+                <tr *ngFor="let item of interestPayments" >
+                  <td>#</td>
+                  <td>{{ item.due_date }}</td>
+                  <td>{{ item.amount_before }} $</td>
+                  <td>- $</td>
+                  <td>{{ item.amount_after }} $</td>
+                  <td>
+                    <span class="badge badge-success">Filled</span>
+                  </td>
+                  <td></td>
+                </tr>
+                
+                
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+
+
+
+  <h4 class="font-weight-bold py-3 mb-4" style="display: none;">
+    Benefits added
+    <div class="text-muted text-tiny mt-1"><small class="font-weight-normal">Profit got on provided analysis</small></div>
+  </h4>
+  <div class="row mt-3" style="display: none;">
+    <div class="col-md-12">
+
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <table class="table mt-2">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Due date</th>
+                  <th>Amount</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Id</td>
+                  <td>2021-05-12 18:56</td>
+                  <td>1.5$</td>
+                  <td>
+                    <span class="badge badge-success">Filled</span>
+                  </td>
+                  <td></td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+  

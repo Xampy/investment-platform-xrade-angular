@@ -1,0 +1,183 @@
+<sidenav [orientation]="orientation" [ngClass]="getClasses()">
+
+  <!-- Inner -->
+  <div class="sidenav-inner" [ngClass]="{ 'py-1': orientation !== 'horizontal' }"> 
+
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 text-center text-white">
+                <img loading="lazy" decoding="async"  src="assets/img/logo.png" height="50" width="50" alt="">
+                <h1>Xrade</h1>
+                <p>Best plateform to invest</p>
+
+                <div class="mt-5">
+                    <button class="btn" ></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 text-white">
+                <span class="text-success text-left" style="margin-bottom: 5px;">Wallet</span>
+                <h3 id="amount-container" class="bg-success text-center" style="border-radius: 10px; padding: 10px;" > {{ accountAmount }} $ </h3>
+                <h3 id="amount-container" class="btn btn-outline-success" style="display: none; border-radius: 10px; padding: 10px;" > {{ lastStableAmount }} $ </h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-2">
+        <div class="row">
+            <div class="col-md-12 text-left text-white">
+                <p>Menus</p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <sidenav-router-link icon="ion ion-ios-home" route="/member/dashboard" [active]="isActive('/member/dashboard')">Dashbord</sidenav-router-link>
+
+    <ng-container *ngIf="showOrderMenu; else elseOrderMenuTemplate">
+        <sidenav-menu 
+        icon="ion ion-md-folder" 
+        text="Order" 
+        [active]="isMenuActive('/home/oip-ordonnances')" 
+        [open]="isMenuOpen('/home/oip-ordonnances')">
+            <sidenav-router-link 
+                icon="ion ion-ios-arrow-forward" 
+                route="/member/order/analysis" 
+                [active]="isActive('/member/order/analysis')">Make Order</sidenav-router-link>
+            <sidenav-router-link 
+                icon="ion ion-ios-arrow-forward" 
+                route="/member/order/list" 
+                [active]="isActive('/member/order/list')">My Orders</sidenav-router-link>
+            <sidenav-router-link 
+                icon="ion ion-ios-arrow-forward" 
+                route="oip-ordonnances/requete" 
+                [active]="isActive('/oip-ordonnances/requete')">Orders Report</sidenav-router-link>
+    </sidenav-menu>
+    </ng-container>
+    <ng-template #elseOrderMenuTemplate>
+        
+    </ng-template>
+    
+    
+   
+
+    <div class="mt-3">
+
+    </div>
+    <sidenav-menu 
+        icon="ion ion-ios-contact" 
+        text="Profile" 
+        [active]="isMenuActive('/home/oip-ordonnances')" 
+        [open]="isMenuOpen('/home/oip-ordonnances')">
+            <sidenav-router-link 
+                icon="ion ion-ios-arrow-forward" 
+                route="/member/profile/detail" 
+                [active]="isActive('/member/profile/detail')">View Profile</sidenav-router-link>
+            <sidenav-router-link 
+                icon="ion ion-ios-arrow-forward" 
+                route="/member/profile/edit" 
+                [active]="isActive('/member/profile/edit')">Edit Profile</sidenav-router-link>
+            <sidenav-router-link 
+                icon="ion ion-ios-arrow-forward" 
+                route="/member/profile/change-password" 
+                [active]="isActive('/member/profile/change-password')">Update password</sidenav-router-link>
+            <sidenav-router-link 
+                icon="ion ion-ios-arrow-forward" 
+                route="/member/profile/transaction-code" 
+                [active]="isActive('/member/profile/transaction-code')">Update transaction code</sidenav-router-link>
+    </sidenav-menu>
+
+    <sidenav-menu 
+        icon="ion ion-ios-contacts" 
+        text="Team" 
+        [active]="isMenuActive('/home/oip-ordonnances')" 
+        [open]="isMenuOpen('/home/oip-ordonnances')">
+            <sidenav-router-link 
+                icon="ion ion-ios-arrow-forward" 
+                route="oip-ordonnances/requete-oip" 
+                [active]="isActive('/oip-ordonnances/requete-oip')">Invite</sidenav-router-link>
+            <sidenav-router-link 
+                icon="ion ion-ios-arrow-forward" 
+                route="oip-ordonnances/requete-oip" 
+                [active]="isActive('/oip-ordonnances/requete-oip')">Team Members</sidenav-router-link>
+    </sidenav-menu>
+
+    <sidenav-menu 
+        icon="ion ion-ios-trending-up" 
+        text="Top Up" 
+        [active]="isMenuActive('/home/oip-ordonnances')" 
+        [open]="isMenuOpen('/home/oip-ordonnances')">
+            <sidenav-router-link 
+                icon="ion ion-ios-arrow-forward" 
+                route="oip-ordonnances/requete-oip" 
+                [active]="isActive('/oip-ordonnances/requete-oip')">Top Up List</sidenav-router-link>
+    </sidenav-menu>
+
+    <sidenav-menu 
+        icon="ion ion-md-cash" 
+        text="Fund" 
+        [active]="isMenuActive('/member/fund')" 
+        [open]="isMenuOpen('/member/fund/deposit')">
+            <sidenav-router-link 
+                icon="ion ion-ios-arrow-forward" 
+                route="/member/fund/deposit" 
+                [active]="isActive('/member/fund/deposit')">Make Deposit</sidenav-router-link>
+            <sidenav-router-link 
+                icon="ion ion-ios-arrow-forward" 
+                route="/member/fund/deposit-report" 
+                [active]="isActive('/member/fund/deposit-report')">Deposit report</sidenav-router-link>
+    </sidenav-menu>
+
+    
+
+
+    <sidenav-menu 
+        icon="ion ion-logo-usd" 
+        text="Withdrawa" 
+        [active]="isMenuActive('/member/fund/withdraw')" 
+        [open]="isMenuOpen('/member/fund/withdraw')">
+            <sidenav-router-link 
+                icon="ion ion-ios-arrow-forward" 
+                route="/member/fund/withdraw" 
+                [active]="isActive('/member/fund/withdraw')">Withdraw</sidenav-router-link>
+            <sidenav-router-link 
+                icon="ion ion-ios-arrow-forward" 
+                route="/member/fund/deposit-report" 
+                [active]="isActive('/member/fund/deposit-report')">Withdraw report</sidenav-router-link>
+    </sidenav-menu>
+
+
+    <sidenav-menu 
+        icon="ion ion-md-pricetags" 
+        text="Earning Report" 
+        [active]="isMenuActive('/home/oip-ordonnances')" 
+        [open]="isMenuOpen('/home/oip-ordonnances')">
+            <sidenav-router-link 
+                icon="ion ion-ios-arrow-forward" 
+                route="oip-ordonnances/requete-oip" 
+                [active]="isActive('/oip-ordonnances/requete-oip')">Earning report</sidenav-router-link>
+    </sidenav-menu>
+
+
+    <sidenav-menu 
+        icon="ion ion-md-help-circle" 
+        text="Support" 
+        [active]="isMenuActive('/home/oip-ordonnances')" 
+        [open]="isMenuOpen('/home/oip-ordonnances')">
+            <sidenav-router-link 
+                icon="ion ion-ios-arrow-forward" 
+                route="oip-ordonnances/requete-oip" 
+                [active]="isActive('/oip-ordonnances/requete-oip')">Support</sidenav-router-link>
+    </sidenav-menu>
+
+
+  </div>
+</sidenav>

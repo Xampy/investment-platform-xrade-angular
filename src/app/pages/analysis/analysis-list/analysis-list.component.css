@@ -1,0 +1,9 @@
+.analysis-container:hover {
+    transition: transform 0.5s ease;
+    cursor: pointer;
+}
+
+
+.analysis-container:hover {
+    transform: scale(1.1);
+}

@@ -1,0 +1,295 @@
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { id } from '@swimlane/ngx-datatable';
+import {
+  ChartComponent,
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexYAxis,
+  ApexXAxis,
+  ApexTitleSubtitle
+} from "ng-apexcharts";
+import { interval, Observable, timer } from 'rxjs';
+import { filter, map, repeat, switchMap } from 'rxjs/operators';
+import { CandleInterface, Mt5ApiService } from 'src/app/services/api/meta-trader/mt5-api.service';
+import { AnalysisDataItem } from 'src/app/store/analysis/models/analysis-data.model';
+import { AppState } from 'src/app/store/models/app-state.model';
+import { CreateMarketOrderItemAction, UpdateAllOrdersLastPositionAction } from 'src/app/store/order/actions/order.actions';
+import { MarketOrderItem } from 'src/app/store/order/models/order.model';
+import { UpdateSignalLastRowItemAction } from 'src/app/store/signal/actions/signal-last-row.actions';
+import { UpdateSignalItemAction } from 'src/app/store/signal/actions/signal.actions';
+import { CandleStick, SignalItem } from 'src/app/store/signal/models/signal.model';
+
+
+export type ChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  yaxis: ApexYAxis;
+  title: ApexTitleSubtitle;
+};
+
+
+
+@Component({
+  selector: 'app-make-order',
+  templateUrl: './make-order.component.html',
+  styleUrls: ['./make-order.component.css']
+})
+export class MakeOrderComponent implements OnInit, AfterViewInit {
+
+    @ViewChild("chart", {static: true}) 
+    chart: ChartComponent;
+
+    public chartOptions: Partial<ChartOptions>;
+
+    @ViewChild("lotPrice") 
+    private lotPrice: ElementRef;
+
+    /**
+     * CurrentMarket orders made the current
+     * user
+     */
+    currentMarketOrders$: Observable<Array<MarketOrderItem>>;
+
+    /**
+     * Current market analysis
+     */
+    analysis: Observable<AnalysisDataItem>;
+    /**
+     * Chart serie array
+     */
+    chartSerieArray: Observable<SignalItem>;
+    /**
+     * It observe the meta trader api
+     * and handle values returned
+     */
+    deviseApiObserver: Observable<Array<CandleInterface>>;
+
+    @Input()
+    /**
+     * Lot took by the member
+     */
+    lot: number = 1;
+
+    /**
+     * The total amount costed for
+     * making the order after choosing the
+     * wanted lot
+     */
+    orderAmount: number = 0;
+    chartSerie: CandleStick[];
+    /**
+     * The market id passed
+     * as parameter to route
+     */
+    id: string;
+    /**
+     * Current postiion on the market
+     */
+    currentPosition: number;
+    takeProfit: number;
+    stopLoss: number;
+    
+
+    constructor(
+        private store: Store<AppState>,
+        private route: ActivatedRoute,
+
+        private metaTraderService: Mt5ApiService
+    ) {
+        
+        this.currentPosition = -1; //To avoid missleading order
+    }
+    ngAfterViewInit(): void {
+        //Get chart series data
+        this.chartSerieArray = this.store.select(store => store.signalsData)
+        .pipe(
+            switchMap(data => data),
+            filter( (item: SignalItem, index: number) => {
+                return item.analysis_id === this.id;
+            })
+        );
+
+        this.chartSerieArray.subscribe(
+            (data) => {
+                this.chartSerie = data.candles;
+                
+            }
+        );
+    }
+    ngOnInit(): void {
+        this.id = "";
+        this.route.params.subscribe(async params => {
+            console.log(params);
+            this.id = params['market'];
+        });
+
+
+        //[START] get order on the current market
+        this.currentMarketOrders$ = this.store.select(store => store.marketOrderData)
+        .pipe(
+            map(data => data.filter(
+                (item) => {
+                    return item.analysis_id === this.id;
+                })
+            )
+        )
+
+        this.currentMarketOrders$.subscribe(
+            (data) => {
+                console.log(data);
+            }
+        )
+        //[END]
+
+
+
+
+        this.analysis = this.store.select(store => store.analysisData)
+        .pipe(
+            switchMap(data => data),
+            filter( (item: AnalysisDataItem, index: number) => {
+                return item.id === this.id;
+            })
+        );
+
+        this.analysis.subscribe(
+            (data) => {
+                this.stopLoss = 8;
+                this.takeProfit = 80;
+            }
+        )
+        
+        
+        //Get signal candle form 
+        //server
+        this.deviseApiObserver =  timer(10000, 65 * 1000)
+        .pipe(
+            switchMap( () =>{ return this.metaTraderService.getCandles(10); } )
+        ) 
+        this.deviseApiObserver
+        .subscribe(
+            (data) => {
+                //Dispach (create)  and update action
+                let action = new UpdateSignalItemAction(
+                    {
+                        id: this.id,
+                        candles: data.map(
+                            (el) => {
+                                return {
+                                    x: new Date(el.time),
+                                    y: [el.open, el.high, el.low, el.close]
+                                }
+                            }
+                        )
+                    }
+                );
+                this.store.dispatch(
+                    action
+                );
+
+                //Dispatch the last element
+                this.store.dispatch(
+                    new UpdateSignalLastRowItemAction(
+                        {
+                            analysis_id: "mk-1",
+                            candle: action.payload.candles[action.payload.candles.length - 1]
+                        }
+                    )
+                )
+
+                //Dispatch to orders tu update the
+                //benefits
+                this.store.dispatch(
+                    new UpdateAllOrdersLastPositionAction(
+                        {
+                            analysis_id: "mk-1",
+                            candle: action.payload.candles[action.payload.candles.length - 1]
+                        }
+                    )
+                )
+            }   
+        );
+
+        //Listen to the signal last row  update
+        this.store.select(store => store.signalsLastData)
+        .pipe(
+            switchMap( data => data),
+            filter( (item, index) => {
+                return item.analysis_id === this.id;
+             })
+        ).subscribe(
+            (data) => {
+                //We will use the open price as the base
+                //We have OHLC
+                if( data != undefined && data.candle != undefined )
+                    this.currentPosition = data.candle.y[0];
+
+                //If there were an order before
+                //calculate 
+            }
+        );
+        
+    }
+
+    /**
+     * Handle the user lot input
+     * change
+     * 
+     * Updat the total cost for the user
+     * 
+     * 
+     * @param event 
+     */
+    lotChange(event){
+        this.lot = parseInt(event.target.value);
+        this.orderAmount = 
+            this.lot * parseInt(this.lotPrice.nativeElement.innerHTML) ;
+    }
+
+
+
+    makeOrder(type: 'buy' | 'sell'){
+        //After order made successfully on
+        //backend
+        //retuyrn informations
+
+        let order: MarketOrderItem = {
+            type: type,
+            lot: 5,
+            member: null,
+            stopLess: 10,
+            takeProfit: 50,
+            position: 1966.366,
+            analysis_id: this.id,
+            process: {
+                lastPosition: this.currentPosition,
+                status: "doing",
+                closedDate: null
+            }
+        }
+
+        console.log(order);
+
+        this.store.dispatch(
+            new CreateMarketOrderItemAction(
+                order
+            )
+        )
+    }
+
+    makeSellOrder(){
+        this.makeOrder('sell');
+    }
+
+    makeBuyOrder(){
+        this.makeOrder('buy');
+    }
+
+
+   
+
+   
+}

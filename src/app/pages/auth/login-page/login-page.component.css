@@ -1,0 +1,122 @@
+#container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    background: linear-gradient(#121D33, #121D33);
+}
+
+#rightContainer {
+    flex: 1;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#formContainer {
+    width: 70%;
+}
+
+
+
+#formContainer>div:nth-child(2) {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.from-control {
+    padding: 10;
+    background-color: whitesmoke;
+    border-color: none;
+    border: 1px solid whitesmoke;
+    border-radius: 20px;
+    height: 40px;
+    outline: none;
+    margin-top: 7px;
+    padding-left: 10px;
+}
+
+.form-group label {
+    font-size: 15px;
+}
+
+.from-control:focus {}
+
+.from-control:hover {}
+
+#connectBtn {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #2782F9;
+    border: 1px solid #2782F9;
+    color: white;
+    transition: filter 0.5s ease;
+    margin-top: 20px;
+}
+
+#forgotten {
+    display: flex;
+    margin-top: 30px;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#connectBtn:hover {
+    filter: brightness(150%);
+}
+
+.form-group:last-child {
+    margin-top: 40px;
+}
+
+#leftContainer {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background: linear-gradient(#121D33, #121D33);
+}
+
+#app-name {
+    font-size: 3em;
+}
+
+
+
+.router-link {
+    color: white;
+    font-size: 1.3em;
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+
+.back-btn{
+    border: 1px solid white;
+    background-color: white;
+    color: #2782F9;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 1.2em;
+    font-weight: 300;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0px 5px 5px 5px #121D33;
+    transition: transform 0.5s ease, background-color 0.5s ease;
+}
+
+.back-btn:hover {
+    transform: scale(1.1);
+    background-color: transparent;
+}

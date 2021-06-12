@@ -1,0 +1,133 @@
+
+
+<div class="container-fluid">
+    <div class="row">
+        <h4 class="font-weight-bold py-3 mb-4">
+            My orders
+            <div class="text-muted text-tiny mt-1"><small class="font-weight-normal">On going and closed</small></div>
+          </h4>
+          
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-xl-3">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="lnr lnr-cart display-4 text-success"></div>
+                <div class="ml-3">
+                  <div class="text-muted small">Total orders ( today)</div>
+                  <div class="text-large">2</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="lnr lnr-earth display-4 text-info"></div>
+                <div class="ml-3">
+                  <div class="text-muted small">Total orders ( today ) : <span class="badge badge-success rounded-pill" >on going</span></div>
+                  <div class="text-large text-success">{{ (orders | async).length }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="lnr lnr-gift display-4 text-danger"></div>
+                <div class="ml-3">
+                    <div class="text-muted small">Total orders ( today ) : <span class="badge badge-primary rounded-pill" >closed</span></div>
+                  <div class="text-large text-primary">98</div>
+                </div>
+              </div>
+            </div>
+          </div>      
+        </div>
+
+        <div class="col-sm-6 col-xl-3">      
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="lnr lnr-users display-4 text-warning"></div>
+                <div class="ml-3">
+                  <div class="text-muted small">Withdrawal</div>
+                  <div class="text-large">10</div>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+        </div>
+    </div>
+    <!-- / Counters -->
+
+    <div class="row mt-2">
+        <div class="col-md-12">
+
+            <div class="card">
+                <h6 class="card-header with-elements">
+                <div class="card-header-title"><span>Total :
+                  <ng-container *ngIf="totalBenefit >= 0; else elseTotalBenefitValue">
+                    <h5 class="text-success" >+ {{ totalBenefit }}$</h5>
+                  </ng-container>
+                  <ng-template #elseTotalBenefitValue>
+                      <h5 class="text-danger" >{{ totalBenefit }}$</h5>
+                  </ng-template>
+                </span> </div>
+                <div class="card-header-elements ml-auto d-flex" style="display: flex; flex-direction: row">
+                    <input type="search" class="form-control" style="width: auto; border-top: none; border-left: none; border-right: none">
+                    <button type="button" class="btn btn-outline"> Filter </button>
+                </div>
+                </h6>
+                <div class="card-body demo-vertical-spacing">
+                   <table class="table">
+                       <thead>
+                           <tr>
+                               <th>Analysis</th>
+                               <th>Lot</th>
+                               <th>Amount</th>
+                               <th>Benefit</th>
+                               <th>Value</th>
+                               <th>Action</th>
+                           </tr>
+                       </thead>
+                        <tbody>
+                            <tr class="order-row" *ngFor="let order of orders | async">
+                              <td>Analyse {{ order.analysis_id }}</td>
+                              <td>{{ order.lot }}</td>
+                              <td> {{ order.amount }}$</td>
+                              <td>
+                                <ng-container *ngIf="order.benefit < 0 ; else elseLossTemplate">
+                                  <span class="badge badge-danger rounded-pill" >Loss</span>
+                                </ng-container>
+                                <ng-template #elseLossTemplate>
+                                  <span class="badge badge-success rounded-pill" style="padding-left: 5px!important;" >Profit</span> 
+                                </ng-template>
+                                
+                               
+                              <td>
+                                <ng-container *ngIf="order.benefit > 0; else elseOrderBenefitValue">
+                                  <h5 class="text-success" >+ {{ order.benefit}}$</h5>
+                                </ng-container>
+                                <ng-template #elseOrderBenefitValue>
+                                    <h5 class="text-danger" >{{ order.benefit }}$</h5>
+                                </ng-template>
+                              </td>
+                              <td><button type="button" class="btn btn-primary" >&times;</button></td>
+                          </tr>
+                        </tbody>
+                   </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

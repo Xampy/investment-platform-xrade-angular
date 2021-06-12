@@ -1,0 +1,221 @@
+
+
+<div class="container-fluid">
+    <div class="row">
+        <h4 class="font-weight-bold py-3 mb-4">
+            Analyse {{ (analysis | async).id }}
+            <div class="text-muted text-tiny mt-1"><small class="font-weight-normal">Today is Tuesday, 8 February 2018</small></div>
+          </h4>
+          
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-8">
+
+            <div class="card">
+                <h6 class="card-header with-elements">
+                <div class="card-header-title">Orders ( {{ (currentMarketOrders$ | async).length }} )</div>
+                </h6>
+                <div class="card-body demo-vertical-spacing">
+                    <div class="justify-content-space-between" style="display: flex; flex-direction: row; justify-content: space-between" >
+                        
+                        <table class="table" style="border-top: none;">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Cost</th>
+                                    <th>TP</th>
+                                    <th>SL</th>
+                                    <th colspan="4"></th>
+                                    <th style="color: #FFFFFF;" >f</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let order of currentMarketOrders$ | async">
+                                    <td>
+                                        {{ order.type | uppercase }}
+                                    </td>
+                                    <td>
+                                        {{ order.amount }}
+                                    </td>
+                                    <td>
+                                        <h5 class="text-success"  >{{ order.takeProfit }}%</h5>
+                                    </td>
+                                    <td>
+                                        <h5 class="text-danger"  >{{ order.stopLess }}%</h5>
+                                    </td> 
+                                    <td colspan="4">
+                                        <div class="text-right" style="display: flex; flex-direction: row; justify-content: flex-end; text-align: right">
+                                            <ng-container *ngIf="order.benefit > 0; else elseOrderBenefit">
+                                                <span class="badge badge-success rounded-pill p-1">Profit</span>
+                                            </ng-container>
+                                            <ng-template #elseOrderBenefit>
+                                                <span class="badge badge-danger rounded-pill p-1">Loss</span>
+                                            </ng-template>
+
+                                            <ng-container *ngIf="order.benefit > 0; else elseOrderBenefitValue">
+                                                <span class="text-success ml-2"  >+ {{ order.benefit}}$</span>
+                                            </ng-container>
+                                            <ng-template #elseOrderBenefitValue>
+                                                <span class="text-danger ml-2" >{{ order.benefit }}$</span>
+                                            </ng-template>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ml-auto" style="text-align: right">
+                                            <button  (click)="closeMarketOrder(order)" type="button" class="btn btn-outline-secondary btn-xs icon-btn borderless font-size: 1.1em ">&times;</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            
+
+            <div class="card mt-2">
+                <h6 class="card-header with-elements">
+                <div class="card-header-title">Data</div>
+                
+                </h6>
+                <div class="card-body demo-vertical-spacing p-1">
+                    <app-canvas-js-chart>
+                    </app-canvas-js-chart>
+                </div>
+            </div>
+
+
+
+            <div class="card mt-2">
+                <h6 class="card-header with-elements">
+                <div class="card-header-title">Data</div>
+                <div class="card-header-elements ml-auto">
+                    <button type="button" class="btn btn-outline-secondary btn-xs icon-btn borderless">→</button>
+                </div>
+                </h6>
+                <div class="card-body demo-vertical-spacing">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">Stop Loss</li>
+                        <li class="breadcrumb-item active  text-danger"> -{{ (analysis | async).stopLoss }}%</li>
+                    </ol>
+
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">Take Profit</li>
+                        <li class="breadcrumb-item active text-success"> +{{ (analysis | async).takeProfit }}%</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div id="chart-data">
+
+            </div>
+        </div>
+
+        <div class="col-md-4 mx-auto">
+           <div id="order-container">
+                <div class="card">
+                    <h6 class="card-header with-elements">
+                    <div class="card-header-title">Available Lot</div>
+                    <div class="card-header-elements ml-auto">
+                        <button type="button" class="btn btn-outline-secondary btn-xs icon-btn borderless">→</button>
+                    </div>
+                    </h6>
+                    <div class="card-body d-flex justify-content-between">
+                    <div class="text-large">{{ (analysis | async).analysis.availableLot }}</div>
+                    <div class="text-right small">
+                        10%<br>Last week: 12
+                    </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h6 class="card-header with-elements">
+                    <div class="card-header-title">Lot Price</div>
+                    <div class="card-header-elements ml-auto">
+                        <button type="button" class="btn btn-outline-secondary btn-xs icon-btn borderless">→</button>
+                    </div>
+                    </h6>
+                    <div class="card-body d-flex justify-content-between">
+                    <div class="text-large">
+                        1 lot = <span #lotPrice >{{ (analysis | async).analysis.price }}</span>$ USD
+                    </div>
+                    <div class="text-right small" style="display: none;">
+                        10%<br>Last week: 12
+                    </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h6 class="card-header with-elements">
+                    <div class="card-header-title">Make order</div>
+                    <div class="card-header-elements ml-auto">
+                        <button type="button" class="btn btn-outline-secondary btn-xs icon-btn borderless">→</button>
+                    </div>
+                    </h6>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="lot">Set you lot</label>
+                            <input (change)="lotChange($event)" onkeydown="return false" min="0" type="number" class="form-control" value="0">
+                        </div>
+
+                        <button *ngIf="orderAmount != 0" type="button" class="btn btn-outline-primary w-100" style="font-size: 20px;"> {{ lot }} * {{ (analysis | async).analysis.price }} = {{ orderAmount }} $</button>
+                        
+                        <div class="text-right small" style="display: none;">
+                            10%<br>Last week: 12
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h6 class="card-header with-elements">
+                    <div class="card-header-title">Take Profit</div>
+                    <div class="card-header-elements ml-auto">
+                        <button type="button" class="btn btn-outline-secondary btn-xs icon-btn borderless">→</button>
+                    </div>
+                    </h6>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label style="width: 100%; justify-content: space-between" for="lot">Specify your TP in % <span class="text-success text-right"> + {{ orderAmount *( takeProfit/100 ) | number:'.0-0'  }}$</span> </label>
+                            <input  onkeydown="return false" [(ngModel)]="takeProfit" min="10" max="{{ providedTakeProfit }}" type="number" class="form-control" value="0">
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h6 class="card-header with-elements">
+                    <div class="card-header-title">Stop Loss</div>
+                    <div class="card-header-elements ml-auto">
+                        <button type="button" class="btn btn-outline-secondary btn-xs icon-btn borderless">→</button>
+                    </div>
+                    </h6>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="lot">Specify your SL in % <span class="text-danger"> - {{  orderAmount *( stopLoss/100 ) | number:'.0-0' }}  $</span> </label>
+                            <input  onkeydown="return false" [(ngModel)]="stopLoss"  min="{{ providedStopLoss }}" type="number" class="form-control" value="0">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    
+
+                    <ng-container *ngIf="isSaving==true; else elseNotSavingTemplate">
+                        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center">
+                            <div class="spinner-border" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <h6 class="mt-3">Please wait...</h6>
+                        </div>
+                    </ng-container>
+                    <ng-template #elseNotSavingTemplate>
+
+                        <div *ngIf="orderAmount != 0 && currentPosition != -1" class="card-body" style="display: flex; justify-content: space-arround">                       
+                            <button (click)="makeBuyOrder()"  type="button" class="btn btn-success w-50" style="font-size: 2em;">BUY</button>
+                            <button (click)="makeSellOrder()" type="button" class="btn btn-danger w-50" style="font-size: 2em;">SELL</button>                        
+                        </div>
+                    </ng-template>
+                </div>
+           </div>
+        </div>
+
+    </div>
+</div>

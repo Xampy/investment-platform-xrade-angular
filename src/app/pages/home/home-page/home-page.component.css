@@ -1,0 +1,160 @@
+/*.app-name {
+    font-size: 25px;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+.menu-link {
+    font-size: 15px;
+}
+
+#banner h1 {
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.x-container-fluid {
+
+}
+
+.x-btn-default {
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 10px;
+    color: white;
+    background-color: transparent;
+}
+
+.x-btn-primary {
+    padding: 10px;
+    border: 1px solid #121D33;
+    border-radius: 10px;
+    color: #121D33;
+    background-color: white;
+}
+
+
+#home-navbar {
+    background: transparent;
+    padding-top: 20px !important;
+    padding-bottom: 20 !important;
+    display: none;
+}*/
+:host {
+    font-family: Roboto;
+    background-color: white;
+}
+.x-pd {
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+
+#logo-container span {
+    font-size: 2em;
+    color: white;
+}
+#home-menu {
+    z-index: 1000;
+    width: 100%;
+    margin-top: 50px;
+    background-color: transparent;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: absolute;
+    top: 0;
+}
+
+#main-nav-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#links-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 1.05em;
+}
+
+.link-data-item {
+    border-bottom-width: 50px;
+    padding: 10px;
+    margin-right: 20px;
+    text-align: left;
+    border-bottom: 2px solid transparent;
+}
+
+.link-data-item  a {
+    color: white;
+    text-decoration: none;
+}
+
+
+.link-data-item:hover {
+    border-bottom-width: 50px;
+    border-bottom: 2px solid #226BCA 
+}
+
+.link-data-item:hover > a {
+    color: #226BCA;
+}
+
+.default-btn {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 15px;
+    font-size: 1.2em;
+    padding-bottom: 15px;
+    border-radius: 5px;
+    background-color: #2782F9;
+    color: white;
+    font-size: 1.05em;
+}
+
+.default-btn:hover {
+    background-color: #070E20;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#main {
+    width: 100%;
+}
+
+#banner-container {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+
+
+.feature-item {
+    border-radius: 50%; 
+    width: 100px; 
+    height: 100px; 
+    background-color: #2782F9;
+}
+
+#history-container {
+    background-color: #070E20;
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    color: white;
+}

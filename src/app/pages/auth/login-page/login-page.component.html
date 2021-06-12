@@ -1,0 +1,96 @@
+<div id="container">
+
+    <div id="leftContainer" style="background-image: url('assets/img/building_background.jpg') ">
+        <div>
+            <div class="text-center">
+                <span id="app-name">Xrade</span>
+                <p>Best plateform for investment...</p>
+            </div>
+
+        </div>
+        <div style="margin-top: 10px;">
+            <span>No have an account ?  <a [routerLink]="[ '/auth', 'register' ]" class="router-link">Create an Account</a></span>
+        </div>
+    </div>
+
+    <div id="rightContainer">
+        <div id="formContainer">
+            <div style="display: none;">
+                <a class="back-btn" [routerLink]="['/']">Home</a>
+            </div>
+            <div>
+                <img src="assets/img/logo.png" width="50" height="50" alt="">
+            </div>
+            <div class="mt-3 text-center">
+                <h4>Log in to your account</h4>
+                <p>
+                    Access your online account, see all your smart money grawing up.
+                </p>
+            </div>
+            <form [formGroup]="signinForm" (ngSubmit)="onSubmit()" class="mt-5">
+                <div class="form-group">
+                    <label>Phone number</label>
+                    <input 
+                        type="text"
+                        class="from-control"
+                        name="telephone"
+                        placeholder="code tel"
+                        formControlName="telephone">
+                    <div class="text-danger mt-1 pt-2" style="display: column;" 
+                        *ngIf="signinForm.get('telephone').invalid && (signinForm.get('telephone').dirty || signinForm.get('telephone').touched) ">
+                        
+                        <span *ngIf="signinForm.get('telephone').errors.required" >
+                            Phone number is required
+                        </span>
+                        <span *ngIf="signinForm.get('telephone').errors.pattern" >
+                            Incorrect phone format
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input 
+                        type="password" 
+                        class="from-control"
+                        name="password"
+                        placeholder=""
+                        value=""
+                        formControlName="password">
+                    <div class="alert-danger mt-1 p-3" 
+                        *ngIf="signinForm.get('password').invalid && (signinForm.get('password').dirty || signinForm.get('password').touched) ">
+                        <ul>
+                            <li *ngIf="signinForm.get('password').errors.required" >
+                               Password is required
+                            </li>
+                            <li *ngIf="signinForm.get('password').errors.minLength" >
+                                Password minimum length is 4
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <ng-container *ngIf="isLogging==true; else elseNotLoggingTemplate">
+                        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center">
+                            <div class="spinner-border" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <h6 class="mt-3">Please wait...</h6>
+                        </div>
+                    </ng-container>
+
+                    <ng-template #elseNotLoggingTemplate>
+                        <button id="connectBtn" type="submit" [disabled]="signinForm.invalid" >Sign in</button>
+                    </ng-template>
+                    
+                </div>
+
+                <div class="form-group" id="forgotten">
+                    <span>Forgot password ?</span>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>

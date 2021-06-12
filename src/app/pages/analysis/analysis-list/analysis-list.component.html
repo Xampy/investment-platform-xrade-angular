@@ -1,0 +1,36 @@
+
+
+<div class="row">
+    <h4 class="font-weight-bold py-3 mb-4">
+        Market analysis
+        <div class="text-muted text-tiny mt-1"><small class="font-weight-normal">Today is Tuesday, 8 February 2018</small></div>
+      </h4>
+</div>
+
+<div class="row">
+  <div class="col-md-12 text-right">
+    <button class="btn btn-primary">Load More</button>
+  </div>
+</div>
+<div class="row mt-4">
+    <div class="col-md-3" *ngFor="let item of analysis | async" (click)="makeOrder(item)" >
+        <div class="card mb-4 analysis-container">
+            <div class="card-header border-0 pb-0">Analysis</div>
+            <div class="card-body text-center text-success text-xlarge py-3">1lot = {{ item.analysis.price }}$</div>
+            <div class="card-footer border-0 small pt-0">
+              <div class="float-right text-success" style="display: flex; flex-direction: column">
+                <span><small class="ion ion-md-arrow-round-up"></small> {{ item.takeProfit }}%</span>
+                <span class="text-danger" style="padding-left: 5px;"><small class="ion ion-md-arrow-round-down"></small>
+                {{ item.stopLoss }}%</span>
+              </div>
+              <span class="text-muted">
+                <div style="display: flex; flex-direction: column">
+                  <span>Available: <strong>{{ item.analysis.availableLot }}</strong></span>
+                  <span>Total: {{ item.analysis.totalLot }}</span>
+                </div>
+              </span>
+                
+            </div>
+          </div>
+    </div>
+</div>
