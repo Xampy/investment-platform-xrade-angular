@@ -61,6 +61,7 @@ export class DashboardComponent implements OnInit {
     totalProfit: number = 0.00;
     totalAmount: number = 0.00;
     dailyInterest: number = 0.00;
+    investmentProfit: number = 0.00;
 
     constructor(
         private router: Router, 
@@ -104,10 +105,11 @@ export class DashboardComponent implements OnInit {
 
                 if(this.member != null){
                     this.totalProfit = 0 + this.member.interest_account.amount;
+                    this.investmentProfit = this.member.interest_account.amount;
                     this.realAmount = this.member.account.amount;
                     this.totalAmount = this.member.account.amount + this.totalProfit;
 
-                    this.dailyInterest =  Math.round( (0.95 * this.realAmount)/100  );
+                    this.dailyInterest =  0.00;//Math.round( (0.95 * this.realAmount)/100  );
                 }
             }
         )
