@@ -44,7 +44,7 @@
                                 <p>
                                     <span class="text-muted">Set the amount in $</span>
                                 </p>
-                                <input [(ngModel)]="amount" type="number" class="form-control w-100" type="number" min="25" value="25">
+                                <input [(ngModel)]="amount" type="number" class="form-control w-100" type="number" min="25" max="{{ member.interest_account.amount }}" value="25">
                             </td>
                         </tr>
 
