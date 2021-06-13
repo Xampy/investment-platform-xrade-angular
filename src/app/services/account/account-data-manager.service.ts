@@ -21,7 +21,7 @@ export class AccountDataManagerService {
             }else{
                 this.memberSubject$.next(this.member);
             }
-        }, 1000 * 2);
+        }, 1000 * 5);
         
     }
 

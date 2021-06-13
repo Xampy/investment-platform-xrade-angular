@@ -118,6 +118,9 @@ import { SecurityApiService } from './services/api/xrade/security/security-api.s
 import { MemberInterestPaymentApiService } from './services/api/xrade/fund/interest-payment/member-interest-payment-api.service';
 import { AsyncMemberReferenceValidator } from './share/validators/async-reference.validator';
 import { CardPaymentService } from './services/api/payment/card/card-payment.service';
+import { InvestmentProfitWithdrawalComponent } from './pages/fund/investment-profit-withdrawal/investment-profit-withdrawal.component';
+import { InvestmentProfitApiService } from './services/api/xrade/fund/interest-profit/investment-profit-api.service';
+import { InvestmentProfitMergeComponent } from './pages/fund/investment-profit-merge/investment-profit-merge.component';
 
 // *******************************************************************************
 //
@@ -151,6 +154,8 @@ import { CardPaymentService } from './services/api/payment/card/card-payment.ser
     WithdrawReportPageComponent,
     MakeWithdrawRequestPageComponent,
     DepositReportPageComponent,
+    InvestmentProfitWithdrawalComponent,
+    InvestmentProfitMergeComponent,
   ],
 
   imports: [
@@ -232,6 +237,7 @@ import { CardPaymentService } from './services/api/payment/card/card-payment.ser
     MemberWithdrawApiService,
     MemberInterestPaymentApiService,
     CardPaymentService,
+    InvestmentProfitApiService,
 
 
     //Toasts Service

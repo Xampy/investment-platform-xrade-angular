@@ -114,6 +114,14 @@ export class DashboardComponent implements OnInit {
 
     }
 
+    profitWithdrawal(){
+        this.router.navigate(['/member/fund/investment-profit/withdrawal'])
+    }
+
+    profitMerge(){
+        this.router.navigate(['/member/fund/investment-profit/merge'])
+    }
+
     ngOnInit(): void {
         console.log("App set up");
 

@@ -30,6 +30,8 @@ import { RequireAuthenticationGuardService } from './services/guards/auth/requir
 import { RequireNoAuthenticationGuardService } from './services/guards/auth/require-no-authentication-guard.service';
 import { DepositReportPageComponent } from './pages/fund/deposit-report-page/deposit-report-page.component';
 import { MakeWithdrawRequestPageComponent } from './pages/withdraw/make-withdraw-request-page/make-withdraw-request-page.component';
+import { InvestmentProfitWithdrawalComponent } from './pages/fund/investment-profit-withdrawal/investment-profit-withdrawal.component';
+import { InvestmentProfitMergeComponent } from './pages/fund/investment-profit-merge/investment-profit-merge.component';
 
 // *******************************************************************************
 // Routes
@@ -44,11 +46,11 @@ const routes: Routes = [
 
     { path: 'member', component: Layout2Component, canActivate:[RequireAuthenticationGuardService], children: [ // 
         { path: 'dashboard', component: DashboardComponent, pathMatch: 'full' },
-        { path: 'order', children: [
+        /*{ path: 'order', children: [
             { path: 'analysis', component:  AnalysisListComponent , pathMatch: 'full' },
             { path: 'new/:market', component:  MakeOrderComponent , pathMatch: 'full' },
             { path: 'list', component:  OrdersListComponent , pathMatch: 'full' },
-        ]},
+        ]},*/
         { path: 'profile', children: [
             { path: 'detail', component:  ProfileDetailPageComponent , pathMatch: 'full' },
             { path: 'edit', component:  ProfileEditPageComponent , pathMatch: 'full' },
@@ -59,6 +61,10 @@ const routes: Routes = [
             { path: 'deposit', component:  MakeDepositPageComponent , pathMatch: 'full' },
             { path: 'deposit-report', component:  DepositReportPageComponent , pathMatch: 'full' }, 
             { path: 'withdraw', component:  MakeWithdrawRequestPageComponent , pathMatch: 'full' },
+            { path: 'investment-profit', children: [ 
+                { path:'withdrawal', component: InvestmentProfitWithdrawalComponent, pathMatch: 'full'},
+                { path:'merge', component: InvestmentProfitMergeComponent, pathMatch: 'full'}
+            ]},
         ] },
     ]},
 
