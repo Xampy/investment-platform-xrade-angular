@@ -39,12 +39,50 @@ export class SecurityApiService extends AbstractAPIRequest {
      * @param reference reference to check
      */
     verifyMemberReference(reference: string){
-        let url = this.RESOURCE_BASE_PATH + `/reference/check`;
+        let url = this.RESOURCE_BASE_PATH + `/check/reference`;
         return this.http.get<{status: "valid" | "invalid"}>(
             url,
             {
                 headers: this.requestHeaders,
                 params: new HttpParams().append("reference", reference)
+            }
+        ).pipe(
+            catchError(this.handleError)
+        )
+    }
+
+    /**
+     * Verify if there is a member with
+     * the given email
+     * 
+     * @param email reference to check
+     */
+    verifyMemberEmail(email: string){
+        let url = this.RESOURCE_BASE_PATH + `/check/email`;
+        return this.http.get<{status: "valid" | "invalid"}>(
+            url,
+            {
+                headers: this.requestHeaders,
+                params: new HttpParams().append("email", email)
+            }
+        ).pipe(
+            catchError(this.handleError)
+        )
+    }
+
+     /**
+     * Verify if there is a member with
+     * the given phone
+     * 
+     * @param phone phone to check
+     */
+      verifyMemberPhone(phone: string){
+        let url = this.RESOURCE_BASE_PATH + `/check/phone`;
+        return this.http.get<{status: "valid" | "invalid"}>(
+            url,
+            {
+                headers: this.requestHeaders,
+                params: new HttpParams().append("phone", phone)
             }
         ).pipe(
             catchError(this.handleError)

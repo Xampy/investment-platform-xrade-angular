@@ -8,23 +8,21 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 text-center text-white">
-                <img loading="lazy" decoding="async"  src="assets/img/logo.png" height="50" width="50" alt="">
-                <h1>Xrade</h1>
-                <p>Best plateform to invest</p>
-
-                <div class="mt-5">
-                    <button class="btn" ></button>
+                <img loading="lazy" decoding="async"  src="assets/img/blueship_logo_small.png" height="90" width="160" alt="">
+                <p>Grow up your smart money</p>
+                <div class="mt-3">
+                    <a class="btn btn-outline-primary" [routerLink]="[ '/']">Home</a>
                 </div>
             </div>
         </div>
     </div>
 
 
-    <div class="container-fluid">
+    <div class="container-fluid mt-5">
         <div class="row">
             <div class="col-md-12 text-white">
-                <span class="text-success text-left" style="margin-bottom: 8px;">Wallet</span>
-                <h3 id="amount-container" class="bg-success text-center" style="border-radius: 10px; padding: 10px;" > {{ accountAmount }} $ </h3>
+                <span class="text-primary text-left" style="margin-bottom: 8px;">Wallet</span>
+                <h3 id="amount-container" class="bg-primary text-center" style="border-radius: 10px; padding: 10px;" > {{ accountAmount }} $ </h3>
                 <h3 id="amount-container" class="btn btn-outline-success" style="display: none; border-radius: 10px; padding: 10px;" > {{ lastStableAmount }} $ </h3>
             </div>
         </div>
@@ -142,12 +140,12 @@
     <sidenav-menu 
         icon="ion ion-logo-usd" 
         text="Withdrawa" 
-        [active]="isMenuActive('/member/fund/withdraw')" 
-        [open]="isMenuOpen('/member/fund/withdraw')">
+        [active]="isMenuActive('/member/fund/withdrawal')" 
+        [open]="isMenuOpen('/member/fund/withdrawal')">
             <sidenav-router-link 
                 icon="ion ion-ios-arrow-forward" 
                 route="/member/fund/withdraw" 
-                [active]="isActive('/member/fund/withdraw')">Withdraw</sidenav-router-link>
+                [active]="isActive('/member/fund/withdrawal')">Withdraw</sidenav-router-link>
             <sidenav-router-link 
                 icon="ion ion-ios-arrow-forward" 
                 route="/member/fund/deposit-report" 

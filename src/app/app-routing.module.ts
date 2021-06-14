@@ -32,6 +32,8 @@ import { DepositReportPageComponent } from './pages/fund/deposit-report-page/dep
 import { MakeWithdrawRequestPageComponent } from './pages/withdraw/make-withdraw-request-page/make-withdraw-request-page.component';
 import { InvestmentProfitWithdrawalComponent } from './pages/fund/investment-profit-withdrawal/investment-profit-withdrawal.component';
 import { InvestmentProfitMergeComponent } from './pages/fund/investment-profit-merge/investment-profit-merge.component';
+import { SponsorshipProfitWithdrawalComponent } from './pages/fund/sponsorship-profit-withdrawal/sponsorship-profit-withdrawal.component';
+import { SponsorshipProfitMergeComponent } from './pages/fund/sponsorship-profit-merge/sponsorship-profit-merge.component';
 
 // *******************************************************************************
 // Routes
@@ -60,10 +62,14 @@ const routes: Routes = [
         { path: 'fund', children: [ 
             { path: 'deposit', component:  MakeDepositPageComponent , pathMatch: 'full' },
             { path: 'deposit-report', component:  DepositReportPageComponent , pathMatch: 'full' }, 
-            { path: 'withdraw', component:  MakeWithdrawRequestPageComponent , pathMatch: 'full' },
+            { path: 'withdrawal', component:  MakeWithdrawRequestPageComponent , pathMatch: 'full' },
             { path: 'investment-profit', children: [ 
                 { path:'withdrawal', component: InvestmentProfitWithdrawalComponent, pathMatch: 'full'},
                 { path:'merge', component: InvestmentProfitMergeComponent, pathMatch: 'full'}
+            ]},
+            { path: 'sponsorship-profit', children: [ 
+                { path:'withdrawal', component: SponsorshipProfitWithdrawalComponent, pathMatch: 'full'},
+                { path:'merge', component: SponsorshipProfitMergeComponent, pathMatch: 'full'}
             ]},
         ] },
     ]},

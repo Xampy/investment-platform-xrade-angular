@@ -35,7 +35,6 @@ export class LayoutSidenavComponent implements OnInit, AfterViewInit {
       private router: Router, 
       private appService: AppService, 
       private layoutService: LayoutService,
-      private accountAmountManagerService: AccountAmountManagerService,
       private memberDataManager: AccountDataManagerService,
       ) {
       // Set host classes
@@ -55,7 +54,7 @@ export class LayoutSidenavComponent implements OnInit, AfterViewInit {
           //Check the member is not nulll
           if(data != null){
             //then set the amount value
-            this.accountAmount = data.account.amount + data.interest_account.amount;
+            this.accountAmount = data.account.amount + data.interest_account.amount + data.sponsorship_account.amount;
           }
         }
       )

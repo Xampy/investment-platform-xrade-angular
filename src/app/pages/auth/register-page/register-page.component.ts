@@ -103,6 +103,11 @@ export class RegisterPageComponent implements OnInit,  AfterViewInit {
                 (data) => {
                     console.log(data);
                     if( data.status == "valid"){
+
+                        //Validate email
+
+                        //On success validate phone
+
                         //Check password
                         if(this.registerForm.get("password").value != this.registerForm.get("confirm_password").value){
                             this.isLogging = false;

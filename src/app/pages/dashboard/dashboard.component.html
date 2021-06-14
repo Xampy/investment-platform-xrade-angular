@@ -33,7 +33,7 @@
                 <h2>{{ realAmount }} $</h2>               
               </div>
               <div class="text-large mt-3 w-100 text-right">
-                <button class="btn btn-default" style="background-color: #fff; color: black;">Withdrawal</button>
+                <button (click)="investmentWithdrawal()" class="btn btn-default" style="background-color: #fff; color: black;">Withdrawal</button>
               </div>
             </div>
           </div>
@@ -59,8 +59,9 @@
                 </ng-template>                
               </div>
               <div class="text-large mt-3 w-100 text-right">
-                <button class="btn"></button>
-                <button class="btn"></button>
+                
+                <button (click)="sponsorshipMerge()" class="btn btn-outline-success">Merge</button>
+                <button (click)="sponsorshipWithdrawal()" class="btn btn-outline-danger">Withdrawal</button>
               </div>
             </div>
           </div>
@@ -84,11 +85,11 @@
             <div class="ml-3 w-100">
               <div class="small">Sponsorship</div>
               <div class="text-large mt-3">
-                <h2>0 $</h2>
+                <h2>{{ sponsorshipProfit }} $</h2>
               </div>
               <div class="text-large mt-3 w-100 text-right">
-                <button class="btn btn-outline-success">Merge</button>
-                <button class="btn btn-outline-danger">Withdrawal</button>
+                <button (click)="sponsorshipMerge()" class="btn btn-outline-success">Merge</button>
+                <button (click)="sponsorshipWithdrawal()" class="btn btn-outline-danger">Withdrawal</button>
               </div>
             </div>
           </div>
@@ -99,7 +100,7 @@
 
     <div class="col-sm-6 col-xl-6">
   
-      <div class="card mb-4">
+      <div class="card mb-4 bg-primary text-white">
         <div class="card-body">
           <div class="d-flex align-items-center">
             <div class="lnr lnr-earth display-4 text-info"></div>
@@ -110,8 +111,8 @@
                 <h2>{{ totalProfit }} $</h2>
               </div>
               <div class="text-large mt-3 w-100 text-right">
-                <button (click)="profitMerge()" class="btn btn-outline-success">Merge</button>
-                <button (click)="profitWithdrawal()" class="btn btn-outline-danger">Withdrawal</button>
+                <button class="btn"></button>
+                <button class="btn"></button>
               </div>
             </div>
           </div>

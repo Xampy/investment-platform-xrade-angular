@@ -1,6 +1,6 @@
 
 <h4 class="font-weight-bold py-3 mb-4">
-    Withdrawl request on investment amount
+    Merge request on sponsorship profit
     <div class="text-muted text-tiny mt-1"><small class="font-weight-normal">Today is Tuesday, 8 February 2018</small></div>
   </h4>
 
@@ -11,10 +11,10 @@
             <div class="d-flex align-items-center">
                 <div class="lnr lnr-earth display-4 text-info"></div>
                 <div class="ml-3 w-100">
-                <div class="small">Investment amount</div>
+                <div class="small">Soponsorship total profit</div>
                 <div class="text-large mt-3">
                     <ng-container *ngIf="member != null; else elseMemberNullAmountTemplate">
-                    <h2>{{ member.account.amount }} $</h2>
+                    <h2>{{ member.sponsorship_account.amount }} $</h2>
                     </ng-container>
                     <ng-template #elseMemberNullAmountTemplate>
                     <h2>0 $</h2>
@@ -38,37 +38,20 @@
                 
                 <table class="table">
                     <tbody>
-
-                        <tr>
-                            <td class="text-left text-muted">
-                               <select name="paymentMethod" [(ngModel)]="payment" id="" class="form-control">
-                                   <option value="btc" selected>Bitcoin</option>
-                                   <option value="cdc">Credit & Debit Card</option>
-                               </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-left text-muted">
-                                <p>
-                                    <span class="text-muted">Add iformation or description to deposit request</span>
-                                </p>
-                                <textarea [(ngModel)]="metadata" type="text" class="form-control w-100"></textarea>
-                            </td>
-                        </tr>
                         
                         <tr>
                             <td class="text-left text-muted">
                                 <p>
                                     <span class="text-muted">Set the amount in $</span>
                                 </p>
-                                <input [(ngModel)]="amount" type="number" class="form-control w-100" type="number" min="5" value="5">
+                                <input [(ngModel)]="amount" type="number" class="form-control w-100" type="number" min="25" max="{{ member.interest_account.amount }}" value="25">
                             </td>
                         </tr>
 
                         <tr>
                             <td colspan="3">
-                                <ng-container *ngIf="canWithdrawal==true; else elseTemplate">
-                                    <button *ngIf="!isRequesting"  (click)="requestWithdrawal()" class="connectBtn w-100" >Proceed request</button>
+                                <ng-container *ngIf="canMerge==true; else elseTemplate">
+                                    <button *ngIf="!isRequesting"  (click)="requestMerge()" class="connectBtn w-100" >Proceed request</button>
                                     <div *ngIf="isRequesting" class="mt-3" style="display: flex; flex-direction: column; justify-content: center; align-items: center">
                                         <div class="spinner-border" role="status">
                                             <span class="sr-only">Loading...</span>
@@ -77,7 +60,7 @@
                                     </div>
                                 </ng-container>
                                 <ng-template #elseTemplate>
-                                    <span class="text-danger">You need to have a minimum of 1 USD on your account</span>
+                                    <span class="text-danger">You need to have a minimum of 25 USD on your account</span>
                                 </ng-template>
                                 
                                 

@@ -17,7 +17,7 @@ export class MemberWithdrawApiService extends AbstractAPIRequest {
     }
 
     createWithdrawRequest(input: MemberDepositApiRequestInputInterface){
-        let url = this.RESOURCE_BASE_PATH + `/withdraw`;
+        let url = this.RESOURCE_BASE_PATH + `/withdrawal`;
         return this.http.post(
             url,
             JSON.stringify(input),

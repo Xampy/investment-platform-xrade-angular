@@ -34,10 +34,10 @@ export class LoginPageComponent implements OnInit {
 
     intiLoginForm(){
         this.signinForm = this.formBuilder.group({
-            telephone: [null, 
+            email: [null, 
                 [
                     Validators.required, 
-                    Validators.pattern('([0-9]+) ([0-9]+)')
+                    Validators.email
                 ]
             ],
             password: [null, 
@@ -59,7 +59,7 @@ export class LoginPageComponent implements OnInit {
 
             this.isLogging = true;
             let credentials: MemberLoginApiRequestInput = {
-                phone: this.signinForm.get("telephone").value,
+                email: this.signinForm.get("email").value,
                 password: this.signinForm.get("password").value
             }
             this.authApiService.loginUser(credentials)

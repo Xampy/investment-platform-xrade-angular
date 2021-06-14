@@ -62,6 +62,7 @@ export class DashboardComponent implements OnInit {
     totalAmount: number = 0.00;
     dailyInterest: number = 0.00;
     investmentProfit: number = 0.00;
+    sponsorshipProfit: number = 0.00;
 
     constructor(
         private router: Router, 
@@ -104,8 +105,9 @@ export class DashboardComponent implements OnInit {
                 console.log(this.member);
 
                 if(this.member != null){
-                    this.totalProfit = 0 + this.member.interest_account.amount;
+                    this.totalProfit = this.member.sponsorship_account.amount + this.member.interest_account.amount;
                     this.investmentProfit = this.member.interest_account.amount;
+                    this.sponsorshipProfit = this.member.sponsorship_account.amount;
                     this.realAmount = this.member.account.amount;
                     this.totalAmount = this.member.account.amount + this.totalProfit;
 
@@ -116,12 +118,24 @@ export class DashboardComponent implements OnInit {
 
     }
 
+    investmentWithdrawal(){
+        this.router.navigate(['/member/fund/withdrawal']);
+    }
+
     profitWithdrawal(){
-        this.router.navigate(['/member/fund/investment-profit/withdrawal'])
+        this.router.navigate(['/member/fund/investment-profit/withdrawal']);
     }
 
     profitMerge(){
-        this.router.navigate(['/member/fund/investment-profit/merge'])
+        this.router.navigate(['/member/fund/investment-profit/merge']);
+    }
+
+    sponsorshipWithdrawal(){
+        this.router.navigate(['/member/fund/sponsorship-profit/withdrawal']);
+    }
+
+    sponsorshipMerge(){
+        this.router.navigate(['/member/fund/sponsorship-profit/merge']);
     }
 
     ngOnInit(): void {

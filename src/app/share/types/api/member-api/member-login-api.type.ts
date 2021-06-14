@@ -1,7 +1,7 @@
 
 
 export interface MemberLoginApiRequestInput {
-    phone: string,
+    email: string,
     password: string
 }
 
@@ -11,6 +11,7 @@ export interface MemberLoginApiRequestOutputData {
     firstname: string,
     password: string,
     grade: string,
+    created_at: string,
     point: number,
     verified?: boolean,
     phone: string,
@@ -22,6 +23,9 @@ export interface MemberLoginApiRequestOutputData {
         amount: number
     },
     interest_account: {
+        amount: number
+    },
+    sponsorship_account: {
         amount: number
     }
     

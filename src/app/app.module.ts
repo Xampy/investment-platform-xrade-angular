@@ -121,6 +121,9 @@ import { CardPaymentService } from './services/api/payment/card/card-payment.ser
 import { InvestmentProfitWithdrawalComponent } from './pages/fund/investment-profit-withdrawal/investment-profit-withdrawal.component';
 import { InvestmentProfitApiService } from './services/api/xrade/fund/interest-profit/investment-profit-api.service';
 import { InvestmentProfitMergeComponent } from './pages/fund/investment-profit-merge/investment-profit-merge.component';
+import { SponsorshipProfitWithdrawalComponent } from './pages/fund/sponsorship-profit-withdrawal/sponsorship-profit-withdrawal.component';
+import { SponsorshipProfitMergeComponent } from './pages/fund/sponsorship-profit-merge/sponsorship-profit-merge.component';
+import { SponsorshipProfitService } from './services/api/xrade/fund/sponsorship-profit/sponsorship-profit.service';
 
 // *******************************************************************************
 //
@@ -156,6 +159,8 @@ import { InvestmentProfitMergeComponent } from './pages/fund/investment-profit-m
     DepositReportPageComponent,
     InvestmentProfitWithdrawalComponent,
     InvestmentProfitMergeComponent,
+    SponsorshipProfitWithdrawalComponent,
+    SponsorshipProfitMergeComponent,
   ],
 
   imports: [
@@ -238,6 +243,7 @@ import { InvestmentProfitMergeComponent } from './pages/fund/investment-profit-m
     MemberInterestPaymentApiService,
     CardPaymentService,
     InvestmentProfitApiService,
+    SponsorshipProfitService,
 
 
     //Toasts Service

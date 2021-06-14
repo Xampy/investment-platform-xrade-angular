@@ -29,21 +29,21 @@
             </div>
             <form [formGroup]="signinForm" (ngSubmit)="onSubmit()" class="mt-5">
                 <div class="form-group">
-                    <label>Phone number</label>
+                    <label>Email</label>
                     <input 
                         type="text"
                         class="from-control"
-                        name="telephone"
+                        name="email"
                         placeholder="code tel"
-                        formControlName="telephone">
+                        formControlName="email">
                     <div class="text-danger mt-1 pt-2" style="display: column;" 
-                        *ngIf="signinForm.get('telephone').invalid && (signinForm.get('telephone').dirty || signinForm.get('telephone').touched) ">
+                        *ngIf="signinForm.get('email').invalid && (signinForm.get('email').dirty || signinForm.get('email').touched) ">
                         
-                        <span *ngIf="signinForm.get('telephone').errors.required" >
-                            Phone number is required
+                        <span *ngIf="signinForm.get('email').errors.required" >
+                            Email is required
                         </span>
-                        <span *ngIf="signinForm.get('telephone').errors.pattern" >
-                            Incorrect phone format
+                        <span *ngIf="signinForm.get('email').errors.email" >
+                            Incorrect emailformat
                         </span>
                     </div>
                 </div>

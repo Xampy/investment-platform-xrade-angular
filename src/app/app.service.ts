@@ -7,7 +7,7 @@ export class AppService {
 
     // Set page title
     set pageTitle(value: string) {
-      this.titleService.setTitle(`${value} - Xrade Investment`);
+      this.titleService.setTitle(`${value} - Blue Ship Investment`);
     }
 
     // Check for RTL layout
