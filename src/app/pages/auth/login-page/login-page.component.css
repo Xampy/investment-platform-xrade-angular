@@ -120,3 +120,11 @@
     transform: scale(1.1);
     background-color: transparent;
 }
+
+
+
+@media screen and (max-width: 480px) {
+    #leftContainer {
+      display: none;
+    }
+}

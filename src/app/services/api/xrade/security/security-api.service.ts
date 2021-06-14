@@ -88,4 +88,24 @@ export class SecurityApiService extends AbstractAPIRequest {
             catchError(this.handleError)
         )
     }
+
+
+     /**
+     * Verify if there is a member with
+     * the given username
+     * 
+     * @param username username to check
+     */
+      verifyMemberUsername(username: string){
+        let url = this.RESOURCE_BASE_PATH + `/check/username`;
+        return this.http.get<{status: "valid" | "invalid"}>(
+            url,
+            {
+                headers: this.requestHeaders,
+                params: new HttpParams().append("username", username)
+            }
+        ).pipe(
+            catchError(this.handleError)
+        )
+    }
 }
