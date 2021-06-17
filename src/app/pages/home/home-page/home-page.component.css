@@ -8,6 +8,10 @@
     padding-right: 15%;
 }
 
+.x-pd-r {
+    padding-right: 15%;
+}
+
 
 #logo-container span {
     font-size: 2em;
@@ -107,7 +111,7 @@
     width: 100%;
 }
 
-#banner-container {
+#banner-container, #banner-about-container {
     padding-top: 100px;
     padding-bottom: 100px;
 }
@@ -148,6 +152,11 @@
     color: white;
 }
 
+
+#feedsback-container {
+    background-color: #070E20;
+}
+
 #footer-container {
     background-color: #070E20;
     text-align: center;
@@ -162,8 +171,9 @@
 
 .payment-item {
     text-align: center;
-    width: 142px;
-    height: 92px;
+    width: 100px;
+    height: 70px;
+    margin-top: 10px;
 }
 
 .payment-image-container {
@@ -176,14 +186,14 @@
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    box-shadow: 0 0 2px 1px rgb(235, 231, 231);
+    /*box-shadow: 0 0 2px 1px rgb(235, 231, 231);*/
     transition: transform 0.5s ease-in-out;
     cursor: pointer;
 }
 
 .payment-image-container:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 2px 6px rgb(235, 231, 231);
+    box-shadow: 0 0 2px 6px rgb(248, 242, 242);
 }
 
 
@@ -208,8 +218,26 @@
 
 
 @media screen and (max-width: 500px) {
+
+
+    .x-pd {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
     
-    #banner-right {
-        display: none;
+    .x-pd-r {
+        padding-right: 5%;
+    }
+    
+    #banner-right, #testimonial-image {
+        display: none !important;
+    }
+
+    #banner-left, #banner-container {
+        height: auto !important;
+    }
+
+    #testimonial-data {
+        padding-left: 5%;
     }
 }

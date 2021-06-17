@@ -19,6 +19,7 @@ export class LayoutNavbarComponent implements OnInit{
 
     grade: string = "unknow";
     points: number = 0;
+    username: string = "";
 
     constructor(
         private router: Router,
@@ -59,6 +60,7 @@ export class LayoutNavbarComponent implements OnInit{
                 if(data != null){
                     this.grade = data.grade;
                     this.points = data.point;
+                    this.username = data.firstname;
                 }
             }
         )

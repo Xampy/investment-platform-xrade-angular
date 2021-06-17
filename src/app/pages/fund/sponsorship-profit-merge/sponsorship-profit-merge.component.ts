@@ -15,7 +15,7 @@ export class SponsorshipProfitMergeComponent implements OnInit {
     member: MemberLoginApiRequestOutputData;
 
     metadata: string = "";
-    amount: number = 0.00;
+    amount: number = 20.00;
     canMerge = false;
     isRequesting: boolean = false;
     

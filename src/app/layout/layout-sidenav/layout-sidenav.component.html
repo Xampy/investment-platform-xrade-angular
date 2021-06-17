@@ -79,36 +79,28 @@
                 icon="ion ion-ios-arrow-forward" 
                 route="/member/profile/detail" 
                 [active]="isActive('/member/profile/detail')">View Profile</sidenav-router-link>
-            <sidenav-router-link 
-                icon="ion ion-ios-arrow-forward" 
-                route="/member/profile/edit" 
-                [active]="isActive('/member/profile/edit')">Edit Profile</sidenav-router-link>
+
+            
             <sidenav-router-link 
                 icon="ion ion-ios-arrow-forward" 
                 route="/member/profile/change-password" 
                 [active]="isActive('/member/profile/change-password')">Update password</sidenav-router-link>
-            <sidenav-router-link 
-                icon="ion ion-ios-arrow-forward" 
-                route="/member/profile/transaction-code" 
-                [active]="isActive('/member/profile/transaction-code')">Update transaction code</sidenav-router-link>
     </sidenav-menu>
 
     <sidenav-menu 
         icon="ion ion-ios-contacts" 
         text="Team" 
-        [active]="isMenuActive('/home/oip-ordonnances')" 
-        [open]="isMenuOpen('/home/oip-ordonnances')">
+        [active]="isMenuActive('/member/team')" 
+        [open]="isMenuOpen('/member/team')">
             <sidenav-router-link 
                 icon="ion ion-ios-arrow-forward" 
-                route="oip-ordonnances/requete-oip" 
-                [active]="isActive('/oip-ordonnances/requete-oip')">Invite</sidenav-router-link>
-            <sidenav-router-link 
-                icon="ion ion-ios-arrow-forward" 
-                route="oip-ordonnances/requete-oip" 
-                [active]="isActive('/oip-ordonnances/requete-oip')">Team Members</sidenav-router-link>
+                route="/member/team/invite" 
+                [active]="isActive('/member/team/invite')">Invite</sidenav-router-link>
+            
     </sidenav-menu>
 
-    <sidenav-menu 
+    <div style="display: none;">
+        <sidenav-menu 
         icon="ion ion-ios-trending-up" 
         text="Top Up" 
         [active]="isMenuActive('/home/oip-ordonnances')" 
@@ -118,6 +110,8 @@
                 route="oip-ordonnances/requete-oip" 
                 [active]="isActive('/oip-ordonnances/requete-oip')">Top Up List</sidenav-router-link>
     </sidenav-menu>
+    </div>
+    
 
     <sidenav-menu 
         icon="ion ion-md-cash" 
@@ -139,17 +133,17 @@
 
     <sidenav-menu 
         icon="ion ion-logo-usd" 
-        text="Withdrawa" 
+        text="Withdrawal" 
         [active]="isMenuActive('/member/fund/withdrawal')" 
         [open]="isMenuOpen('/member/fund/withdrawal')">
             <sidenav-router-link 
                 icon="ion ion-ios-arrow-forward" 
-                route="/member/fund/withdraw" 
-                [active]="isActive('/member/fund/withdrawal')">Withdraw</sidenav-router-link>
+                route="/member/fund/withdrawal" 
+                [active]="isActive('/member/fund/withdrawal')">Withdrawal</sidenav-router-link>
             <sidenav-router-link 
                 icon="ion ion-ios-arrow-forward" 
                 route="/member/fund/deposit-report" 
-                [active]="isActive('/member/fund/deposit-report')">Withdraw report</sidenav-router-link>
+                [active]="isActive('/member/fund/deposit-report')">Withdrawal report</sidenav-router-link>
     </sidenav-menu>
 
 

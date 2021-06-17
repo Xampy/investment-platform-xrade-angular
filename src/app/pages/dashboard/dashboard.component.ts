@@ -114,7 +114,7 @@ export class DashboardComponent implements OnInit {
                     this.dailyInterest =  0.00;//Math.round( (0.95 * this.realAmount)/100  );
                 }
             }
-        )
+        );
 
     }
 

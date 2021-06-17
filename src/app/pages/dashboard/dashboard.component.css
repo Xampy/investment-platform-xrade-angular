@@ -1,0 +1,22 @@
+
+
+.merge-btn {
+    border-color: goldenrod;
+    background: transparent;
+    color: goldenrod;
+}
+
+.merge-btn:hover {
+    background-color: goldenrod;
+    color: white;
+}
+
+.withdrawal-btn {
+    border-color: #26B4FF;
+    background: transparent;
+    color: #26B4FF;
+}
+.withdrawal-btn:hover {
+    background-color: #26B4FF;
+    color: white;
+}

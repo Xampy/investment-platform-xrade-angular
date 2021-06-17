@@ -152,7 +152,7 @@
       <!-- Divider -->
       <div class="nav-item d-none d-lg-block text-big font-weight-light line-height-1 opacity-25 mr-3 ml-1">|</div>
       <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-        <span class="text-success" style="font-size: 1.3em;" > +20 %</span>
+        <span class="" style="font-size: 1.3em; color: goldenrod !important;" > +20 %</span>
         <small>Since 03-12-2021</small>
       </div>
       <div ngbDropdown [placement]="isRTL ? 'bottom-left' : 'bottom-right'" class="demo-navbar-user nav-item">
@@ -163,9 +163,9 @@
           </span>
         </a>
         <div ngbDropdownMenu [class.dropdown-menu-right]="!isRTL">
-          <a href="javascript:void(0)" class="dropdown-item"><i class="ion ion-ios-person text-lightest"></i> &nbsp; <span class="badge badge-success" >{{ grade }}</span></a>
+          <a href="javascript:void(0)" class="dropdown-item"><i class="ion ion-ios-person text-lightest"></i> &nbsp; <span class="badge badge-success" >{{ username }}</span></a>
           <div class="dropdown-divider"></div>
-          <span (click)="logout()" class="dropdown-item"><i class="ion ion-ios-log-out text-danger"></i> &nbsp; Log Out</span>
+          <span (click)="logout()" class="dropdown-item" style="cursor: pointer;"><i class="ion ion-ios-log-out text-danger"></i> &nbsp; Log Out</span>
         </div>
       </div>
     </div>

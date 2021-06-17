@@ -38,6 +38,7 @@ import { ArchwizardModule } from 'ng2-archwizard';
 import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
 import { TextMaskModule } from 'angular2-text-mask';
 import { NgApexchartsModule } from "ng-apexcharts";
+import {Ng2TelInputModule} from 'ng2-tel-input';
 
 
 
@@ -221,6 +222,9 @@ import { SponsorshipProfitService } from './services/api/xrade/fund/sponsorship-
     ToastrModule.forRoot({
       toastClass: 'toast'
     }),
+
+    //Tel validation
+    Ng2TelInputModule,
 
 
 

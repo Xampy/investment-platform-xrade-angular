@@ -12,16 +12,16 @@
             <div id="links-container">
                 <div id="links-data-container">
                     <span class="link-data-item">
-                        <a href="#"> HOME</a>
+                        <a href="#banner-container"> HOME</a>
                     </span>
                     <span class="link-data-item">
-                        <a href="#"> ABOUT US</a>
+                        <a href="#banner-about-container"> ABOUT US</a>
                     </span>
                     <span class="link-data-item">
-                        <a href="#">FEATURES</a>
+                        <a href="#values-container">FEATURES</a>
                     </span>
                     <span class="link-data-item">
-                        <a href="#">SERVICES</a>
+                        <a href="#services-container">SERVICES</a>
                     </span>
                     <span class="link-data-item">
                         <a href="#">CONTACT</a>
@@ -48,14 +48,14 @@
             background-size: cover; height: 100vh;">
 
             <div class="row text-white">
-                <div class="col-md-6" style="padding-top: 180px;">
+                <div class="col-md-6"  id="banner-left" style="padding-top: 180px;">
                     <span style="display: block;"><span style="font-size: 3em; color: var(--green);">1%</span> per day</span>
                     <span
                     style="font-size: 4em; font-weight: bold; line-height: 70px;"
                     >Grow up your money.<br/>Best plateform for investment</span>
 
                     <p style="margin-top: 50px;">
-                        Use our yera of experiences to make profit.
+                        Use our year of experiences to make profit.
                     </p>
 
                     <div style="margin-top: 100px;">
@@ -74,7 +74,7 @@
             </div>
         </div>
 
-        <div id="banner-container" class="x-pd">
+        <div id="banner-about-container" class="x-pd mt-5">
             <div class="row">
                 <div class="col-md-6">
                     <img src="assets/img/about_us.png" width="100%" height="100%" alt="">
@@ -323,9 +323,9 @@
             </div>
 
 
-            <div class="row" style="margin-top: 200px;">
-                <div class="col-md-6 mt-3">
-                    <img src="assets/img/transaction_icon.svg" width="420" height="450" alt="">
+            <div class="row" style="margin-top: 120px;">
+                <div class="col-md-6 my-auto text-center mt-3">
+                    <img src="assets/img/transaction_icon.svg" width="200" height="250" alt="">
                 </div>
 
                 <div class="col-md-6 mt-3">
@@ -338,23 +338,36 @@
                         <div class="col-md-12">
                             <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around;">
                                 <div class="payment-item">
-                                    <div class="payment-image-container" (click)="swithPaymentMethod('bank')">
+                                    <div class="payment-image-container" >
                                         <img src="assets/img/MasterCard.svg" width="50" height="30" alt="">
                                     </div>
-                                    <small class="payment-title">Credit & Debit Card</small>
                                 </div>
                                 <div class="payment-item">
-                                    <div class="payment-image-container" (click)="swithPaymentMethod('perfect-money')">
+                                    <div class="payment-image-container" >
+                                        <img src="assets/img/VISA.svg" width="50" height="30" alt="">
+                                    </div>
+                                </div>
+                                <div class="payment-item">
+                                    <div class="payment-image-container" >
                                         <img src="assets/img/PerfectM.gif" width="80" height="30" alt="">
                                     </div>
-                                    <small class="payment-title">Perfect Money</small>
                                 </div>
                                 <div class="payment-item">
-                                    <div class="payment-image-container" (click)="swithPaymentMethod('crypto')">
+                                    <div class="payment-image-container">
                                         <img src="assets/img/bitcoin_img.png" width="50" height="50" alt="">
                                     </div>
-                                    <small class="payment-title">Bitcoin</small>
                                 </div>
+                                <div class="payment-item">
+                                    <div class="payment-image-container" >
+                                        <img src="assets/img/JetonWL.svg" width="80" height="30" alt="">
+                                    </div>
+                                </div>
+                                <div class="payment-item">
+                                    <div class="payment-image-container">
+                                        <img src="assets/img/WebMoney.svg" width="50" height="50" alt="">
+                                    </div>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -383,8 +396,8 @@
                         Bonus withdrawable instantly.
                      </p>
 
-                    <div class="row text-right" style="margin-top: 100px;">
-                        <div class="col-md-12 text-right">
+                    <div class="row text-left" style="margin-top: 100px;">
+                        <div class="col-md-12 text-left">
                             <a class="default-btn" [routerLink]="[ '/auth', 'login' ]">Get into my account</a>
                         </div>
                         
@@ -392,21 +405,21 @@
 
                 </div>
 
-                <div class="col-md-6 mt-3 text-right">
-                    <img src="assets/img/marketing_icon.svg" width="420" height="450" alt="">
+                <div class="col-md-6 mt-3 text-center">
+                    <img src="assets/img/marketing_icon.svg" width="200" height="250" alt="">
                 </div>
             </div>
 
 
             <div class="row" style="margin-top: 200px;">
-                <div class="col-md-6 mt-3">
-                    <img src="assets/img/security_icon.svg" width="420" height="450" alt="">
+                <div class="col-md-6 mt-3 text-center">
+                    <img src="assets/img/security_icon.svg" width="200" height="250" alt="">
                 </div>
 
                 <div class="col-md-6 mt-3">
                     <h1>Security</h1>
                     <p class="mt-5">
-                        We protect an maintain your avvount, and all your transactions
+                        We protect an maintain your account, and all your transactions
                     </p>
 
                     <div class="row text-right" style="margin-top: 100px;">
@@ -422,20 +435,120 @@
         </div>
 
 
+        <div id="feedsback-container" class="x-pd-r" style="margin-top: 100px; display: flex; flex-direction: row; justify-content: space-between;">
+
+            <div id="testimonial-image" style="display: flex; flex: 1">
+                <img src="assets/img/testimonials.png" width="100%" height="auto" alt="">
+            </div>
+
+            <div id="testimonial-data" style="display: flex; flex-direction: column; flex: 1; padding-top: 100px; padding-bottom: 100px;">
+                <div class="row">
+                    <div class="col-md-12" style="display: flex; flex-direction: column;">
+                        <h4 style="color: #2782F9;" >TESTIMONIALS</h4>
+                        <h1 style="color: white; font-size: 3em;">
+                            What say clients
+                        </h1>    
+                        <div style="width: 100px; height: 5px; background-color: #2782F9;"></div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-md-2">
+                        <img src="assets/img/testimonial.jpg" width="80" height="80" style="border-radius: 50%;"  alt="">
+                    </div>
+                    <div class="col-md-4 mt-3 my-auto">
+                        <h5 class="text-white">Jackson</h5>
+                        <span style="color: #2782F9;">Manger</span>
+                    </div>
+                </div>
+
+
+                <div class="row mt-5">
+                    <div class="col-md-12 text-white">
+                        <p style="font-size: 1.5em;">
+                            Success is no accident. It is hard work, perseverance, learning, 
+                            studying, sacrifice and most of all, love of what you are 
+                            doing or learning to do. perseverance, learning, studying, 
+                            sacrifice and most of all, love of what you are doing
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            
+        </div>
+
+
+        <div id="payments-container" class="x-pd " style="margin-top: 100px;">
+            
+
+
+            <div class=" row mt-5">
+                <div class="col-md-12">
+                    <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around;">
+                        <div class="payment-item">
+                            <div class="payment-image-container" >
+                                <img src="assets/img/MasterCard.svg" width="50" height="30" alt="">
+                            </div>
+                        </div>
+                        <div class="payment-item">
+                            <div class="payment-image-container" >
+                                <img src="assets/img/VISA.svg" width="50" height="30" alt="">
+                            </div>
+                        </div>
+                        <div class="payment-item">
+                            <div class="payment-image-container" >
+                                <img src="assets/img/PerfectM.gif" width="80" height="30" alt="">
+                            </div>
+                        </div>
+                        <div class="payment-item">
+                            <div class="payment-image-container">
+                                <img src="assets/img/bitcoin_img.png" width="50" height="50" alt="">
+                            </div>
+                        </div>
+                        <div class="payment-item">
+                            <div class="payment-image-container" >
+                                <img src="assets/img/JetonWL.svg" width="80" height="30" alt="">
+                            </div>
+                        </div>
+                        <div class="payment-item">
+                            <div class="payment-image-container">
+                                <img src="assets/img/WebMoney.svg" width="50" height="50" alt="">
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+
+
         <div id="footer-container" class="x-pd" style="margin-top: 100px;">
 
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 mt-5 text-left">
                     <img src="assets/img/blueship_logo_small.png" width="200"  alt="">
-                </div>
-                <div class="col-md-4 text-left">
                     <p>
                         We Help in your business to grow and expand, 
                         BlueShip Funds offers you a 
                         holistic approach towards business by bringing to its distributors.
                     </p>
                 </div>
-                <div class="col-md-5 text-right">
+                <div class="col-md-3 offset-md-3 text-left mt-5">
+                    <div class="row">
+                        <div class="col-md-12 text-left" style="display: flex; flex-direction: column; ">
+                            <h4 style="color: white;">
+                                Menus
+                            </h4>        
+                            <div style="width: 70px; height: 5px; background-color: #2782F9;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mt-5 text-right">
                     <a class="default-btn" [routerLink]="[ '/auth', 'login' ]">Sign in</a>
                     <a class="default-btn ml-5" [routerLink]="[ '/auth', 'register' ]">Register</a>
                 </div>

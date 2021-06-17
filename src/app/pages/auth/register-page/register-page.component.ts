@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthApiService } from 'src/app/services/api/xrade/auth/auth-api.service';
 import { SecurityApiService } from 'src/app/services/api/xrade/security/security-api.service';
 import { AppToastService } from 'src/app/services/component/app-toast.service';
@@ -24,7 +24,12 @@ export class RegisterPageComponent implements OnInit,  AfterViewInit {
     registerForm: FormGroup;
 
 
+    countryData: any[] = [];
+
+
     isLogging: boolean = false;
+    sponsorId: string = "xampy";
+    dialCode: string;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -32,9 +37,18 @@ export class RegisterPageComponent implements OnInit,  AfterViewInit {
         private securityService: SecurityApiService,
         private authApiService: AuthApiService,
         private toastsService: AppToastService,
-        private router: Router
+        private router: Router,
+        private route: ActivatedRoute
     ) { 
         this.member = new MemberRegisterApiRequestInput();
+
+        //Try to get the spônsor id from the url
+        this.route.queryParams.subscribe(
+            (params) => {
+                console.log(params);
+                this.sponsorId =  params["sponsorId"];
+            }
+        )
     }
 
 
@@ -43,7 +57,7 @@ export class RegisterPageComponent implements OnInit,  AfterViewInit {
 
     intiRegisterForm(){
         this.registerForm = this.formBuilder.group({
-            referrer: ['Xampy', 
+            referrer: [ this.sponsorId != null ? this.sponsorId : "xampy", 
                 [
                     Validators.required
                 ],
@@ -87,6 +101,27 @@ export class RegisterPageComponent implements OnInit,  AfterViewInit {
 
     countryChangeHandler(event){
         this.registerForm.get("country").setValue(event.target.value, {
+            onlySelf: true
+        });
+    }
+
+
+
+    hasError(event){ console.log(event); } 
+    getNumber(event){ console.log(event); } 
+    telInputObject(event){ 
+        console.log(event);
+
+        setTimeout(() => {
+            this.countryData = event.p;
+        });
+        
+    }
+
+    onCountryChange(event){ 
+        console.log(event);
+        this.dialCode = event.dialCode;
+        this.registerForm.get("country").setValue(event.name, {
             onlySelf: true
         });
     }
@@ -147,7 +182,7 @@ export class RegisterPageComponent implements OnInit,  AfterViewInit {
                                                                 this.member.email = this.registerForm.get("email").value;
                                                                 this.member.referenced = this.registerForm.get("referrer").value;
                                                                 this.member.firstname = this.registerForm.get("username").value;
-                                                                this.member.phone = this.registerForm.get("telephone").value;
+                                                                this.member.phone = "+" + this.dialCode + " " + this.registerForm.get("telephone").value;
                                                                 this.member.password = this.registerForm.get("password").value;
                                                                 this.member.country = this.registerForm.get("country").value;
 
@@ -234,7 +269,8 @@ export class RegisterPageComponent implements OnInit,  AfterViewInit {
 
 
     ngOnInit(): void {
-        this.intiRegisterForm()
+
+        this.intiRegisterForm();
     }
 
     ngAfterViewInit(): void {
