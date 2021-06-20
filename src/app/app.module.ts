@@ -126,6 +126,7 @@ import { SponsorshipProfitWithdrawalComponent } from './pages/fund/sponsorship-p
 import { SponsorshipProfitMergeComponent } from './pages/fund/sponsorship-profit-merge/sponsorship-profit-merge.component';
 import { SponsorshipProfitService } from './services/api/xrade/fund/sponsorship-profit/sponsorship-profit.service';
 import { VerifyEmailComponent } from './pages/auth/verify-email/verify-email.component';
+import { CreditCardComponentComponent } from './components/credit-card-component/credit-card-component.component';
 
 // *******************************************************************************
 //
@@ -164,6 +165,7 @@ import { VerifyEmailComponent } from './pages/auth/verify-email/verify-email.com
     SponsorshipProfitWithdrawalComponent,
     SponsorshipProfitMergeComponent,
     VerifyEmailComponent,
+    CreditCardComponentComponent,
   ],
 
   imports: [

@@ -21,13 +21,47 @@
                     </ng-template>                
                 </div>
                 <div class="text-large mt-3 w-100 text-right">
-                    <button class="btn btn-success" disabled></button>
-                    <button class="btn btn-danger" disabled></button>
+                    <button class="btn" disabled></button>
+                    <button class="btn" disabled></button>
                 </div>
                 </div>
             </div>
             </div>
-        </div>  
+        </div>
+
+
+        <div class="card mb-4" *ngIf="paymentMethod != null && paymentMethod != ''">
+            <div class="card-body">
+                <ng-container [ngSwitch]="paymentMethod">
+                    <div *ngSwitchCase="'btc'" >
+                        <label for="btc-address">BTC address <span class="text-danger text-dark">*</span> </label>
+                        <input type="text" id="btc-address" class="form-control w-100">
+                        <small class="text-muted">Specify your bitcoin address</small>
+                    </div>
+
+                    <div *ngSwitchCase="'perfect-money'" >
+                        <label for="btc-address">Perfect-Money <span class="text-danger text-dark">*</span> </label>
+                        <input type="text" id="btc-address" class="form-control w-100">
+                        <small class="text-muted">Specify your perfect-money address</small>
+                    </div>
+    
+                    <div *ngSwitchCase="'credit-card'" >
+                        <label for="" style="color: black;" >Fill credit card data</label>
+                        <app-credit-card-component></app-credit-card-component>
+                    </div>
+    
+                    <div *ngSwitchCase="'paypal'" >
+                        <label for="paypal">Paypal <span class="text-danger text-dark">*</span> </label>
+                        <input type="text" id="paypal" class="form-control w-100">
+                        <small class="text-muted">Specify your email address or phone number</small>
+                    </div>
+                    
+                </ng-container>
+            </div>
+            
+        </div>
+
+
     </div>
 
     <div class="col-sm-6 col-xl-6 mt-3 mx-auto">
@@ -41,18 +75,21 @@
 
                         <tr>
                             <td class="text-left text-muted">
-                               <select name="paymentMethod" id="" class="form-control">
-                                   <option value="btc" selected>Bitcoin</option>
-                                   <option value="cdc">Credit & Debit Card</option>
+                                <label for="paymentMethod" class="text-black">Withdrawal method</label>
+                               <select name="paymentMethod" [(ngModel)]="paymentMethod" id="paymentMethod" class="form-control">
+                                    <option value="" selected>Choose a payment method</option>
+                                    <option value="btc">Bitcoin</option>
+                                   <option value="credit-card">Credit Card</option>
+                                   <option value="perfect-money">Perfect Money</option>
+                                   <option value="paypal">Paypal</option>
                                </select>
                             </td>
                         </tr>
+
                         <tr>
                             <td class="text-left text-muted">
-                                <p>
-                                    <span class="text-muted">Add iformation or description to withdrawal request</span>
-                                </p>
-                                <textarea [(ngModel)]="metadata" type="text" class="form-control w-100"></textarea>
+                                <label for="metadata">Add iformation or description to withdrawal request</label>
+                                <textarea [(ngModel)]="metadata" id="metadata" type="text" class="form-control w-100"></textarea>
                             </td>
                         </tr>
                         

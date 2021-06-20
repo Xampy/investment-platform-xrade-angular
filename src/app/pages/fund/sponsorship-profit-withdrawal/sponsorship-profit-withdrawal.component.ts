@@ -32,7 +32,7 @@ export class SponsorshipProfitWithdrawalComponent implements OnInit {
                 this.member = data;
                 console.log(this.member);
 
-                if(this.member.interest_account.amount >= 1){
+                if(data != null && this.member.interest_account.amount >= 1){
                     this.canWithdrawal = true;
                 }
             }

@@ -31,7 +31,7 @@ export class SponsorshipProfitMergeComponent implements OnInit {
                 this.member = data;
                 console.log(this.member);
 
-                if(this.member.interest_account.amount >= 5){
+                if(data != null && this.member.interest_account.amount >= 5){
                     this.canMerge = true;
                 }
             }

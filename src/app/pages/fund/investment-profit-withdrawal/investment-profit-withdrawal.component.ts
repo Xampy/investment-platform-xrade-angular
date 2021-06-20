@@ -18,6 +18,7 @@ export class InvestmentProfitWithdrawalComponent implements OnInit {
     amount: number = 0.00;
     canWithdrawal = false;
     isRequesting: boolean = false;
+    paymentMethod: string = "";
     
     constructor(
         public memberDataManager: AccountDataManagerService,
@@ -31,7 +32,7 @@ export class InvestmentProfitWithdrawalComponent implements OnInit {
                 this.member = data;
                 console.log(this.member);
 
-                if(this.member.interest_account.amount >= 1){
+                if(data != null && this.member.interest_account.amount >= 1){
                     this.canWithdrawal = true;
                 }
             }
@@ -41,10 +42,11 @@ export class InvestmentProfitWithdrawalComponent implements OnInit {
     ngOnInit(): void {
     }
 
+
     requestWithdrawal(){
 
         this.isRequesting = true;
-        this.investmentProfitApiService.createWithdrawalRequest({amount: this.amount, payment: "btc", metadata: "test"})
+        this.investmentProfitApiService.createWithdrawalRequest({amount: this.amount, payment: this.paymentMethod, metadata: "test"})
         .subscribe(
             (data) => {
                 console.log(data);

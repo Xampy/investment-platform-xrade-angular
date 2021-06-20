@@ -23,7 +23,7 @@ export class CardPaymentService extends AbstractAPIRequest {
      * @param data payment data 
      * @returns 
      */
-    createSession(data: {amount: number}){
+    createSession(data: {amount: number, card_data: string}){
         let url = this.RESOURCE_BASE_PATH;
         return this.http.post(
             url,

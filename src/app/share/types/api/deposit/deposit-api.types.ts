@@ -1,5 +1,32 @@
 
 
+export interface BlueShipPayments {
+    card: CreditCardInterface
+}
+
+
+export interface CreditCardInterface {
+    name: string,
+    number: string,
+    exp: string,
+    cvc: string
+}
+
+export class CreditCardItem implements CreditCardInterface {
+    name: string;
+    number: string;
+    exp: string;
+    cvc: string;
+    
+    constructor(){
+        this.cvc = "";
+        this.exp = "";
+        this.name = "";
+        this.number = ""
+    }
+}
+
+
 export interface MemberDepositApiRequestInputInterface {
     member_account_id: number,
     payment: string,

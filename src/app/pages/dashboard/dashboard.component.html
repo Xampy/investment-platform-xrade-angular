@@ -4,7 +4,7 @@
     <div class="col-sm-6 col-xl-6">
       <h4 class="font-weight-bold py-3 mb-4">
         Dashboard
-        <div class="text-muted text-tiny mt-1"><small class="font-weight-normal">Today is Tuesday, 8 February 2018</small></div>
+        <div class="text-muted text-tiny mt-1"><small class="font-weight-normal">{{ date }}</small></div>
       </h4>
     </div>
     <div class="col-sm-6 col-xl-6 text-right">
@@ -60,8 +60,8 @@
               </div>
               <div class="text-large mt-3 w-100 text-right">
                 
-                <button (click)="sponsorshipMerge()" class="btn merge-btn">Merge</button>
-                <button (click)="sponsorshipWithdrawal()" class="btn withdrawal-btn">Withdrawal</button>
+                <button (click)="profitMerge()" class="btn merge-btn">Reinvest</button>
+                <button (click)="profitWithdrawal()" class="btn withdrawal-btn">Withdrawal</button>
               </div>
             </div>
           </div>
@@ -88,7 +88,7 @@
                 <h2>{{ sponsorshipProfit }} $</h2>
               </div>
               <div class="text-large mt-3 w-100 text-right">
-                <button (click)="sponsorshipMerge()" class="btn merge-btn">Merge</button>
+                <button (click)="sponsorshipMerge()" class="btn merge-btn">withdraw to investment profit</button>
                 <button (click)="sponsorshipWithdrawal()" class="btn withdrawal-btn">Withdrawal</button>
               </div>
             </div>
@@ -111,8 +111,8 @@
                 <h2>{{ totalProfit }} $</h2>
               </div>
               <div class="text-large mt-3 w-100 text-right">
-                <button class="btn"></button>
-                <button class="btn"></button>
+                <button class="btn" disabled></button>
+                <button class="btn" disabled></button>
               </div>
             </div>
           </div>

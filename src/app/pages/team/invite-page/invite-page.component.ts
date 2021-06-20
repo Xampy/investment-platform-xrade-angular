@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountDataManagerService } from 'src/app/services/account/account-data-manager.service';
 
 @Component({
   selector: 'app-invite-page',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InvitePageComponent implements OnInit {
 
-  constructor() { }
+    reference: string = "";
+    constructor(
+        private memberDataManager: AccountDataManagerService
+    ) { }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+        this.memberDataManager.getMemberSubject()
+        .subscribe(
+            (data) => {
+                if(data != null)
+                this.reference = data.reference;
+            }
+        )
+    }
 
 }

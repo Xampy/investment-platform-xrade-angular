@@ -43,7 +43,7 @@
                             <td class="text-left text-muted">
                                <select name="paymentMethod" [(ngModel)]="payment" id="" class="form-control">
                                    <option value="btc" selected>Bitcoin</option>
-                                   <option value="cdc">Credit & Debit Card</option>
+                                   <option value="cdc">Credit Card</option>
                                </select>
                             </td>
                         </tr>
@@ -61,7 +61,7 @@
                                 <p>
                                     <span class="text-muted">Set the amount in $</span>
                                 </p>
-                                <input [(ngModel)]="amount" type="number" onkeydown="return false" class="form-control w-100" type="number" min="5" max="{{ member.sponsorship_account.amount }}" value="5">
+                                <input [(ngModel)]="amount" type="number" onkeydown="return false" class="form-control w-100" type="number" min="5" max="{{ member != null ? member.sponsorship_account.amount : 10 }}" value="5">
                             </td>
                         </tr>
 

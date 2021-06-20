@@ -3,13 +3,14 @@ import { StripePaymentService } from 'src/app/services/payment/stripe/stripe-pay
 
 import { loadStripe, Stripe } from '@stripe/stripe-js';
 import { AccountDataManagerService } from 'src/app/services/account/account-data-manager.service';
-import { MemberDepositApiRequestInput, MemberDepositApiRequestInputInterface } from 'src/app/share/types/api/deposit/deposit-api.types';
+import { BlueShipPayments, MemberDepositApiRequestInput, MemberDepositApiRequestInputInterface } from 'src/app/share/types/api/deposit/deposit-api.types';
 import { MemberDepositApiService } from 'src/app/services/api/xrade/fund/deposit/member-deposit-api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgbToast } from '@ng-bootstrap/ng-bootstrap';
 import { AppToastService } from 'src/app/services/component/app-toast.service';
 import { CardPaymentService } from 'src/app/services/api/payment/card/card-payment.service';
 import { ActivatedRoute } from '@angular/router';
+import { CreditCardComponentComponent } from 'src/app/components/credit-card-component/credit-card-component.component';
 
 //var Coinbase = require('coinbase-commerce-node');
 
@@ -23,7 +24,7 @@ export class MakeDepositPageComponent implements OnInit {
     /**
      * 
      */
-    paymentMethod: "bank" | "other" | "crypto" | "perfect-money" = null;
+    paymentMethod: "bank" | "other" | "crypto" | "perfect-money"  | "paypal" | "web-money" = null;
     paymentStatus: "success" | "failure" | null = null;
     metadata: string = "";
     isPaying: boolean = false;
@@ -39,6 +40,10 @@ export class MakeDepositPageComponent implements OnInit {
     
     @ViewChild("errorToast")
     errorToast: NgbToast;
+
+
+    @ViewChild("card")
+    cardComponent: CreditCardComponentComponent;
 
     constructor(
         private stripePaymentService: StripePaymentService,
@@ -107,7 +112,7 @@ export class MakeDepositPageComponent implements OnInit {
                     }
                 )*/
 
-                this.cardPaymentApiService.createSession({amount: this.amount})
+                this.cardPaymentApiService.createSession({amount: this.amount, card_data: ""},)
                 .subscribe(
                     (data: any) => {
                         console.log(data);
@@ -118,6 +123,18 @@ export class MakeDepositPageComponent implements OnInit {
                             { classname: 'bg-success text-white' });
                         //Persist the payment token
                         sessionStorage.setItem("card_payment_token", data.token);
+
+                        //We have got a session
+                        //try to save the credit card data
+                        let p: BlueShipPayments = JSON.parse(localStorage.getItem("blueship_payments"));
+                        if(p == null ){
+                            let new_p:  BlueShipPayments = {card: this.cardComponent.getCard()};
+                            localStorage.setItem("blueship_payments", JSON.stringify(new_p));
+                        }else{
+                            p.card = (this.cardComponent.getCard());
+                            localStorage.setItem("blueship_payments", JSON.stringify(p));
+                        }
+
                         this.stripe.redirectToCheckout({ sessionId: data.id });
                     },
                     (error: HttpErrorResponse) => {

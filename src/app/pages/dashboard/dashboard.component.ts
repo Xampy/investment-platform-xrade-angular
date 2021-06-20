@@ -64,6 +64,8 @@ export class DashboardComponent implements OnInit {
     investmentProfit: number = 0.00;
     sponsorshipProfit: number = 0.00;
 
+    date: Date = null;
+
     constructor(
         private router: Router, 
         private appService: AppService, 
@@ -80,6 +82,8 @@ export class DashboardComponent implements OnInit {
         private marketAnalysisDataApiService: MarketAnalysisDataApiService,
         private interestPaymentApiService: MemberInterestPaymentApiService,
     ) {
+
+        this.date = new Date();
 
         //Subscribe to the amount observer
         /*this.accountAmontManagerService.getLastStableAmountSubject()

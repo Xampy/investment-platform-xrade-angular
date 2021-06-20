@@ -1,0 +1,41 @@
+<div style="display: flex; flex-direction: column; justify-content: center; width: 100%">
+    <div class="card mt-3 mb-5" style="width: 80%;">
+        <div class="card-title mx-auto"  style="display: none;"> Settings </div>
+        <div class="nav"  style="display: none;">
+            <ul class="mx-auto">
+                <li><a href="#">Account</a></li>
+                <li class="active"><a href="#">Payment</a></li>
+            </ul>
+        </div>
+        <form> <span id="card-header"  style="display: none;">Saved cards:</span>
+            <div class="row row-1"  style="display: none;">
+                <div class="col-2"><img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" /></div>
+                <div class="col-7"> <input type="text" placeholder="**** **** **** 3193"> </div>
+                <div class="col-3 d-flex justify-content-center"> <a href="#">Remove card</a> </div>
+            </div>
+            <div class="row row-1"  style="display: none;">
+                <div class="col-2"><img class="img-fluid" src="https://img.icons8.com/color/48/000000/visa.png" /></div>
+                <div class="col-7"> <input type="text" placeholder="**** **** **** 4296"> </div>
+                <div class="col-3 d-flex justify-content-center"> <a href="#">Remove card</a> </div>
+            </div> 
+            
+            <span id="card-header"  style="display: none;">Add new card:</span>
+            <div class="row-1">
+                <div class="row row-2"> <span id="card-inner">Card holder name</span> </div>
+                <div class="row row-2"> <input type="text" [(ngModel)]="card.name" [ngModelOptions]="{standalone: true}" placeholder=""> </div>
+            </div>
+            <div class="row three">
+                <div class="col-7">
+                    <div class="row-1">
+                        <div class="row row-2 text-left"> <span id="card-inner" class="text-laft">Card number</span> </div>
+                        <div class="row row-2"> <input type="text" [(ngModel)]="card.number" [ngModelOptions]="{standalone: true}"> </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                     <input type="text" [(ngModel)]="card.exp" [ngModelOptions]="{standalone: true}"> </div>
+                <div class="col-2"> <input type="text" [(ngModel)]="card.cvc" [ngModelOptions]="{standalone: true}"> </div>
+            </div> 
+            <!-- <button class="btn d-flex mx-auto" style="display: none;"><b>Add card</b></button>-->
+        </form>
+    </div>
+</div>
