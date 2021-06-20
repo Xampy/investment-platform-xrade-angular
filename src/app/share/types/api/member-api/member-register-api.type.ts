@@ -12,16 +12,19 @@ export interface MemberRegisterApiRequestInputInterface {
 }
 
 export interface MemberRegisterApiRequestOutputInterface {
-    reference: null | string,
-    lastname: string,
-    firstname: string,
-    password: string,
-    phone: string,
-    referenced: string,
-    id: number,
-    email: string,
-    account: {
-        transaction_code: string | null,
-        amount: number
+    data: {
+        reference: null | string,
+        lastname: string,
+        firstname: string,
+        password: string,
+        phone: string,
+        referenced: string,
+        id: number,
+        email: string,
+        account: {
+            transaction_code: string | null,
+            amount: number
+        }
     },
+    verification_token: string
 }

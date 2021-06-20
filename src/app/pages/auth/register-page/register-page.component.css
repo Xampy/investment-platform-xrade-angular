@@ -2,10 +2,11 @@
     display: flex;
     flex-direction: row;
     background: linear-gradient(#121D33, #121D33);
+    height: 100vh;
 }
 
 #rightContainer {
-    flex: 1;
+    flex: 3;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -92,7 +93,7 @@
 }
 
 #leftContainer {
-    flex: 2;
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;

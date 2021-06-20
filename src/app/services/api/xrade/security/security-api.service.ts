@@ -96,13 +96,32 @@ export class SecurityApiService extends AbstractAPIRequest {
      * 
      * @param username username to check
      */
-      verifyMemberUsername(username: string){
+    verifyMemberUsername(username: string){
         let url = this.RESOURCE_BASE_PATH + `/check/username`;
         return this.http.get<{status: "valid" | "invalid"}>(
             url,
             {
                 headers: this.requestHeaders,
                 params: new HttpParams().append("username", username)
+            }
+        ).pipe(
+            catchError(this.handleError)
+        )
+    }
+
+    /**
+     * Verify a member email account
+     * @param verification_token 
+     * @param code 
+     * @returns 
+     */
+    verifyAccount(verification_token: string, code: string){
+        let url = this.RESOURCE_BASE_PATH + `/verify-account`;
+        return this.http.get<{status: "valid" | "invalid"}>(
+            url,
+            {
+                headers: this.requestHeaders,
+                params: new HttpParams().append("verification_token", verification_token).append("code", code)
             }
         ).pipe(
             catchError(this.handleError)

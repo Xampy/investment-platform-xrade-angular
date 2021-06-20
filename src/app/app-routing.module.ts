@@ -35,6 +35,7 @@ import { InvestmentProfitMergeComponent } from './pages/fund/investment-profit-m
 import { SponsorshipProfitWithdrawalComponent } from './pages/fund/sponsorship-profit-withdrawal/sponsorship-profit-withdrawal.component';
 import { SponsorshipProfitMergeComponent } from './pages/fund/sponsorship-profit-merge/sponsorship-profit-merge.component';
 import { InvitePageComponent } from './pages/team/invite-page/invite-page.component';
+import { VerifyEmailComponent } from './pages/auth/verify-email/verify-email.component';
 
 // *******************************************************************************
 // Routes
@@ -45,6 +46,7 @@ const routes: Routes = [
     { path: '', component: HomePageComponent, pathMatch: 'full'},
     { path: 'auth/login', component: LoginPageComponent, canActivate:[RequireNoAuthenticationGuardService], pathMatch: 'full'},
     { path: 'auth/register', component: RegisterPageComponent, canActivate:[RequireNoAuthenticationGuardService], pathMatch: 'full'},
+    { path: 'auth/verify-account', component: VerifyEmailComponent , canActivate:[RequireNoAuthenticationGuardService], pathMatch: 'full'},
     
 
     { path: 'member', component: Layout2Component, canActivate:[RequireAuthenticationGuardService], children: [ // 

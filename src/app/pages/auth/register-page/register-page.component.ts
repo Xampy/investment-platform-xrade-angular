@@ -29,7 +29,7 @@ export class RegisterPageComponent implements OnInit,  AfterViewInit {
 
     isLogging: boolean = false;
     sponsorId: string = "xampy";
-    dialCode: string;
+    dialCode: string = "1"; //By defautl USA is choosed
 
     constructor(
         private formBuilder: FormBuilder,
@@ -191,10 +191,16 @@ export class RegisterPageComponent implements OnInit,  AfterViewInit {
                                                                 this.authApiService.registerUser(this.member)
                                                                 .subscribe(
                                                                     (data) => {
-                                                                        this.isLogging = false;
                                                                         console.log(data);
+
+                                                                        //Persit the verificationtoken
+                                                                        sessionStorage.setItem("verification_token", data.verification_token);
+
+                                                                        this.isLogging = false;
                                                                         this.toastsService.show("Success", 
                                                                             "Sucessfully registered... Please wait", { classname: 'bg-success text-white' });
+                                                                    
+                                                                        this.router.navigate(["/auth", "verify-account"]);
                                                                     },
                                                                     (error) => {
                                                                         this.isLogging = false;
