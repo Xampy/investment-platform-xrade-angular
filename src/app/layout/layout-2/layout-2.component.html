@@ -1,20 +1,26 @@
-<div class="layout-wrapper layout-2" [ngClass]="{'layout-loading': !initialized}">
-  <div class="layout-inner">
-    <app-layout-sidenav></app-layout-sidenav>
+<div style="display: flex;">
+  <app-layout-sidenav></app-layout-sidenav>
+  <div class="layout-wrapper layout-2" [ngClass]="{'layout-loading': !initialized}">
+    <div class="layout-inner" >
+      
 
-    <div class="layout-container">
-      <app-layout-navbar></app-layout-navbar>
-
-      <div class="layout-content">
-        <div class="container-fluid router-transitions flex-grow-1 container-p-y">
-          <router-outlet></router-outlet>
+      <div class="layout-container" style="margin-top: 80px;">
+        <div>
+          <app-layout-navbar  style="position: fixed; top: 0; width: 100%;" ></app-layout-navbar>
         </div>
 
-        <div style="display: none;">
-          <app-layout-footer></app-layout-footer>
+        <div class="layout-content" >
+          <div class="container-fluid router-transitions flex-grow-1 container-p-y">
+            <router-outlet></router-outlet>
+          </div>
+
+          <div style="display: none;">
+            <app-layout-footer></app-layout-footer>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="layout-overlay" (click)="closeSidenav()"></div>
+
 </div>
-<div class="layout-overlay" (click)="closeSidenav()"></div>
