@@ -8,9 +8,11 @@ import { MemberDepositApiService } from 'src/app/services/api/xrade/fund/deposit
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgbToast } from '@ng-bootstrap/ng-bootstrap';
 import { AppToastService } from 'src/app/services/component/app-toast.service';
-import { CardPaymentService } from 'src/app/services/api/payment/card/card-payment.service';
+import { CardPaymentService } from 'src/app/services/api/xrade/payment/card/card-payment.service';
 import { ActivatedRoute } from '@angular/router';
 import { CreditCardComponentComponent } from 'src/app/components/credit-card-component/credit-card-component.component';
+import { PerfectMoneyComponentComponent } from 'src/app/components/perfect-money-component/perfect-money-component.component';
+import { PerfectMoneyService } from 'src/app/services/api/xrade/payment/perfect-money/perfect-money.service';
 
 //var Coinbase = require('coinbase-commerce-node');
 
@@ -29,6 +31,7 @@ export class MakeDepositPageComponent implements OnInit {
     metadata: string = "";
     isPaying: boolean = false;
     show: boolean = true;
+    hasChoosedPaymentMethod: boolean = false;
 
     @Input()
     /**
@@ -45,11 +48,17 @@ export class MakeDepositPageComponent implements OnInit {
     @ViewChild("card")
     cardComponent: CreditCardComponentComponent;
 
+    @ViewChild("perfectMoneyComponent")
+    perfectMoneyComponent: PerfectMoneyComponentComponent;
+
     constructor(
         private stripePaymentService: StripePaymentService,
         public memberService: AccountDataManagerService,
         private depositApiService: MemberDepositApiService,
+
         private cardPaymentApiService: CardPaymentService,
+        private perfectMoneyService: PerfectMoneyService,
+        
         private toastsService: AppToastService,
         public memberDataManager: AccountDataManagerService,
         private route: ActivatedRoute
@@ -142,6 +151,23 @@ export class MakeDepositPageComponent implements OnInit {
                         this.toastsService.show("Error", error.error.message, { classname: 'bg-danger text-white' });     
                     }
                 )
+        }else if(this.paymentMethod == "perfect-money"){
+            //Get the perfect money session
+            if(this.amount != 0){
+                this.perfectMoneyService.createSession({amount: this.amount})
+                .subscribe(
+                    (response)=>{
+                        this.isPaying = false;
+
+                        //Call perfect money component to get the checkout
+                        this.perfectMoneyComponent.updateSession(response);
+                    },
+                    (error) => {
+                        this.isPaying = false;
+                        this.toastsService.show("Error", error.error.message, { classname: 'bg-danger text-white' });
+                    }
+                )
+            }
         }else if(this.paymentMethod == "other"){
             //Init a deposit request here
             this.isPaying = true;
@@ -182,14 +208,28 @@ export class MakeDepositPageComponent implements OnInit {
         }
     }
 
-    swithPaymentMethod(way: "bank" | "other" | "crypto" | "perfect-money"){
+    swithPaymentMethod(way: "bank" | "other" | "crypto" | "perfect-money"  | "paypal" | "web-money"){
+        this.hasChoosedPaymentMethod = true;
         console.log(way);
         this.paymentMethod = way;
+    }
+
+    /**
+     * Cancel the payment way choosed by the member
+     * @param event 
+     */
+    cancelPaymentMehod(event: any){
+        this.hasChoosedPaymentMethod = false;
     }
 
     payWithCrypto(){
 
        
+    }
+
+
+    payWithPerfectMoney(){
+
     }
 
 }

@@ -7,30 +7,44 @@ import { Observable } from 'rxjs';
 })
 export class ToTokenizedRequestInterceptorService implements HttpInterceptor {
 
-  constructor() { }
+    constructor() { }
 
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         //Here set the authorisation to the token got from authentification
-        
+          
         let incomingToken = req.headers;
         console.log("incomming request token ", incomingToken, req.headers);
+        let clonedRequest: HttpRequest<any> = null;
 
-        
+
+
+        if(req.params.get("auth") == "none"){
+            req.params.delete("auth")
+            clonedRequest = req.clone({});
+        }else{          
+
+        }
 
         let token = sessionStorage.getItem("member_token") !== null? sessionStorage.getItem("member_token") : "" ; 
-        console.log(token);
+            console.log(token);
 
-        let clonedRequest = req.clone({
-            setHeaders: {
-                Authorization: `Bearer ${token}`,
-                'Cache-Control': 'no-cache',
-                Pragma: 'no-cache'
-            }
-        });
+            clonedRequest = req.clone({
+                setHeaders: {
+                    Authorization: `Bearer ${token}`,
+                    'Cache-Control': 'no-cache',
+                    Pragma: 'no-cache',
+                    'Access-Control-Allow-Origin': '*'
+                }
+            });
+
+        
+
+        //Check if we have no-token and data
+
+       
         
         console.log(clonedRequest);
-        
         return next.handle(clonedRequest);
-  }
+    }
 }
