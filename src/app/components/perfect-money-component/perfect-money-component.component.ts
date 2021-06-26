@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { PerfectMoneyService } from 'src/app/services/api/xrade/payment/perfect-money/perfect-money.service';
+import { AppToastService } from 'src/app/services/component/app-toast.service';
 
 interface PerfectMoneyDataInterface {
     PAYEE_ACCOUNT: string,
@@ -19,6 +20,9 @@ interface PerfectMoneyDataInterface {
 }
 
 
+declare var $: any;
+
+
 @Component({
   selector: 'app-perfect-money-component',
   templateUrl: './perfect-money-component.component.html',
@@ -26,12 +30,21 @@ interface PerfectMoneyDataInterface {
 })
 export class PerfectMoneyComponentComponent implements OnInit {
 
-    session: {payment_id: string, session_id: string} =null;
+    session: {payment_id: string, session_id: string} = null;
     isLoading: boolean = false;
     checkout: Window;
+    amount: number = 0;
+
+
+    
+    form: Element;
+    isGettingSession: boolean = false;
+    isGettingCheckout: boolean = false;
 
     constructor(
-        private perfectMoneyService: PerfectMoneyService
+        private perfectMoneyService: PerfectMoneyService,
+        
+        private toastsService: AppToastService,
     ) { 
         
     }
@@ -42,31 +55,35 @@ export class PerfectMoneyComponentComponent implements OnInit {
     updateSession(session: {payment_id: string, session_id: string}){
         this.session = session;
     }
-    getCheckout(){
-        console.log(this.session);
-        this.isLoading = true;
 
-        if(this.session != null){
-            this.perfectMoneyService.getCheckout(this.session)
+
+    sendForm(){        
+
+        this.isGettingCheckout = true;
+        $("#perfect-money-form").submit();
+    }
+
+
+    getSession(){
+        if(this.amount != 0){
+
+            this.isGettingSession = true;
+
+            this.perfectMoneyService.createSession({amount: this.amount})
             .subscribe(
-                (response) => {
-                    this.isLoading = false;
-                    console.log(response);
+                (response)=>{
+                    this.isGettingSession = false;
 
-                    this.checkout = window.open("about:blank", "", "", false);
-                    this.checkout.document.write(response);
-
-                    //this.checkout.location.href = "https://perfectmoney.is/api/step1.asp";
+                    this.updateSession(response);
                 },
                 (error) => {
-                    this.isLoading = false;
-                    console.error(error);
-                    
+                    this.isGettingSession = false;
+                    this.toastsService.show("Error", error.error.message, { classname: 'bg-danger text-white' });
                 }
-            );
+            )
+        }else{
+            this.toastsService.show("Error", "The amount must be greater than 0", { classname: 'bg-danger text-white' });
         }
-
-        
     }
 
 }

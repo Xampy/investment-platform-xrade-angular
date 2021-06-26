@@ -1,15 +1,113 @@
 <div class="row">
-    <div class="col">
-        
-        <ng-container *ngIf="session==null; else elseTemplate">
-            <p>Please wait...</p>
-        </ng-container>
-        <ng-template #elseTemplate>
-            Click next to proceed the payment
-        </ng-template>
-        
-            
-    </div>
 
-    <button class="btn btn-large btn-danger mt-5" *ngIf="session != null" (click)="getCheckout()"> Next > </button>
+
+
+    <ng-container *ngIf="session!=null; else elseTemplate">
+        <div class="col-md-6" >
+
+            <ng-container *ngIf="isGettingCheckout==true; else elseNotGettingCheckoutTemplate">
+                
+                <div class="card mb-4">
+                    <div class="card-body p-5">
+                        <div class="mt-3" style="display: flex; flex-direction: column; justify-content: center; align-items: center">
+                            <div class="spinner-border" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <h6 class="mt-3">Please wait...</h6>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+            </ng-container>
+            <ng-template #elseNotGettingCheckoutTemplate>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+
+                        <p>
+                            Please click the button below to continue with your transaction.
+                        </p>
+                        <form class="w-100" action="https://perfectmoney.is/api/step1.asp" method="POST" id="perfect-money-form">
+                            <input type="hidden" name="PAYEE_ACCOUNT" value="U29385398">
+                            <input type="hidden" name="PAYEE_NAME" value="BlueShip LLC USD">
+                            <input type="hidden" name="PAYMENT_AMOUNT" [value]="amount">
+                            <input type="hidden" name="PAYMENT_UNITS" value="USD">
+                            <input type="hidden" name="PAYMENT_ID" [value]="session.payment_id">
+                            <input type="hidden" name="STATUS_URL" value="http://localhost:8080/xrade/api/v1/fill-account/deposit/perfect-money/check">
+                            <input type="hidden" name="PAYMENT_URL" value="http://localhost:4200/member/fund/deposit?status=1">
+                            <input type="hidden" name="PAYMENT_URL_METHOD" value="GET">
+                            <input type="hidden" name="NOPAYMENT_URL" value="http://localhost:4200/member/fund/deposit?status=0">
+                            <input type="hidden" name="NOPAYMENT_URL_METHOD" value="GET">
+                            <input type="hidden" name="BAGGAGE_FIELDS" value="SESSION_ID">
+                            <input type="hidden" name="SESSION_ID" [value]="session.session_id">
+                            <input type="hidden" name="PAYMENT_METHOD" value="PerfectMoney account">
+                
+                            <button type="submit" class="btn btn-large w-100 btn-danger mt-5"  (click)="sendForm()"> Continue > </button>
+                        </form>
+                    </div>
+                </div>
+                
+            </ng-template>
+
+           
+        </div>
+    </ng-container>
+    <ng-template #elseTemplate>
+
+        <div class="col-md-6 offset-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+
+
+                    <ng-container *ngIf="isGettingSession==true; else elseNotGettingSessionTemplate">
+                        <div class="mt-3" style="display: flex; flex-direction: column; justify-content: center; align-items: center">
+                            <div class="spinner-border" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <h6 class="mt-3">Please wait...</h6>
+                        </div>
+                    </ng-container>
+                    <ng-template #elseNotGettingSessionTemplate>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td colspan="3">
+                                        <img src="assets/img/PerfectM.gif" height="30" alt="">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left text-muted">
+                                        <p>
+                                            <span class="text-muted">Set the amount in $</span>
+                                        </p>
+                                        <input [(ngModel)]="amount" type="text" class="form-control w-100" type="number" min="25" value="25">
+                                    </td>
+                                </tr>
+        
+                                <tr *ngIf="session==null" >
+                                    <td colspan="3">
+                                        <button  (click)="getSession()" class="connectBtn w-100" >Proceed payment</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </ng-template>
+
+                    
+                </div>
+            </div>
+        </div>
+
+    </ng-template>
+
+
+
+   
+
+    
+
+
+    
 </div>

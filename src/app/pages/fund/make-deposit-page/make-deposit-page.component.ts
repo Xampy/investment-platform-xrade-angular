@@ -104,6 +104,15 @@ export class MakeDepositPageComponent implements OnInit {
                         )
                     }
                 }
+
+
+                //Check if a perfect money deposit has been cancelled
+                if(params["PAYMENT_BATCH_NUM"] == "0"){
+                    this.toastsService.show(
+                        "Error", 
+                        "Your deposit has been cancelled or an error has occured. Please try agin later", 
+                        { classname: 'bg-danger text-white' });
+                }
             }
         )
     }
@@ -151,23 +160,7 @@ export class MakeDepositPageComponent implements OnInit {
                         this.toastsService.show("Error", error.error.message, { classname: 'bg-danger text-white' });     
                     }
                 )
-        }else if(this.paymentMethod == "perfect-money"){
-            //Get the perfect money session
-            if(this.amount != 0){
-                this.perfectMoneyService.createSession({amount: this.amount})
-                .subscribe(
-                    (response)=>{
-                        this.isPaying = false;
-
-                        //Call perfect money component to get the checkout
-                        this.perfectMoneyComponent.updateSession(response);
-                    },
-                    (error) => {
-                        this.isPaying = false;
-                        this.toastsService.show("Error", error.error.message, { classname: 'bg-danger text-white' });
-                    }
-                )
-            }
+        
         }else if(this.paymentMethod == "other"){
             //Init a deposit request here
             this.isPaying = true;

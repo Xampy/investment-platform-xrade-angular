@@ -64,6 +64,20 @@
     </div>
 </ng-container>
 <ng-template #elseNothasChoosedPaymentMethodTemplate>
+
+    <div class="card mb-4">
+        <div class="card-header text-right">
+            <button class="btn btn-sm btn-danger" (click)="cancelPaymentMehod($event)">
+                Cancel
+            </button>
+        </div>
+        <div class="card-body">
+            <app-perfect-money-component ></app-perfect-money-component>
+        </div>
+    </div>
+    
+
+
     <!-- *ngIf="paymentMethod != null && paymentMethod != ''" -->
     <div class="row" style="margin-top: 10vh;"  >
         <div class="col-md-6 mt-3">
