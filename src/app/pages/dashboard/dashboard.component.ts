@@ -67,23 +67,15 @@ export class DashboardComponent implements OnInit {
     date: Date = null;
 
     constructor(
-        private router: Router, 
-        private appService: AppService, 
-        private layoutService: LayoutService,
-        
-        private store: Store<AppState>,
-        private observersDeviseService: DefaultDeviseService,
-        private orderAmountService: OrderAccountAmountObserverService,
-        private accountAmontManagerService: AccountAmountManagerService,
-
+        private router: Router,
         public memberDataManager: AccountDataManagerService,
 
         //Xrade API
-        private marketAnalysisDataApiService: MarketAnalysisDataApiService,
         private interestPaymentApiService: MemberInterestPaymentApiService,
     ) {
 
         this.date = new Date();
+        this.memberDataManager.init();
 
         //Subscribe to the amount observer
         /*this.accountAmontManagerService.getLastStableAmountSubject()
@@ -92,6 +84,33 @@ export class DashboardComponent implements OnInit {
                 this.realAmount = value;
             }
         )*/
+
+        
+
+    }
+
+    investmentWithdrawal(){
+        this.router.navigate(['/member/fund/withdrawal']);
+    }
+
+    profitWithdrawal(){
+        this.router.navigate(['/member/fund/investment-profit/withdrawal']);
+    }
+
+    profitMerge(){
+        this.router.navigate(['/member/fund/investment-profit/merge']);
+    }
+
+    sponsorshipWithdrawal(){
+        this.router.navigate(['/member/fund/sponsorship-profit/withdrawal']);
+    }
+
+    sponsorshipMerge(){
+        this.router.navigate(['/member/fund/sponsorship-profit/merge']);
+    }
+
+    ngOnInit(): void {
+        console.log("App set up");
 
         this.interestPaymentApiService.getLastest()
         .subscribe(
@@ -119,160 +138,6 @@ export class DashboardComponent implements OnInit {
                 }
             }
         );
-
-    }
-
-    investmentWithdrawal(){
-        this.router.navigate(['/member/fund/withdrawal']);
-    }
-
-    profitWithdrawal(){
-        this.router.navigate(['/member/fund/investment-profit/withdrawal']);
-    }
-
-    profitMerge(){
-        this.router.navigate(['/member/fund/investment-profit/merge']);
-    }
-
-    sponsorshipWithdrawal(){
-        this.router.navigate(['/member/fund/sponsorship-profit/withdrawal']);
-    }
-
-    sponsorshipMerge(){
-        this.router.navigate(['/member/fund/sponsorship-profit/merge']);
-    }
-
-    ngOnInit(): void {
-        console.log("App set up");
-
-        
-        //[START] subscribing market data
-        /*let analysisOberserver = this.marketAnalysisDataApiService
-        .getNext({offset: 0, limit: 1});
-        timer(10000, 60000)
-        .pipe(
-            switchMap(data => analysisOberserver)
-        )
-
-        analysisOberserver.subscribe(
-            (data) => {
-                console.log(data);
-                for(let analysis of data){
-                    //Dispatch action create analysis
-                    this.store.dispatch(
-                        new AddAnalysisDataItemAction(
-                            {
-                                id: "mk-" + analysis.id,
-                                order: analysis.analysis.order_type == "BUY"?"buy":"sell",
-                                position: analysis.analysis.position,
-                                stopLoss: analysis.max_loss,
-                                takeProfit: analysis.max_profit,
-                                startTime: analysis.analysis.start_time,
-                                endTime: analysis.analysis.end_time,
-                                timeframe: analysis.analysis.timeframe,
-                        
-                                analysis: {
-                                    market: { devise: "" },
-                                    totalLot: analysis.total_lot,
-                                    availableLot: analysis.available_lot,
-                                    price: analysis.price,
-                                    published: true
-                                }
-                            }
-                        )
-                    );
-
-                    //After create observer on each to observe
-                    //The change the total  lot
-                    
-
-                    let isIn_index = this.analysisUpdate.findIndex((item, index) => item.id == analysis.id);
-                    if (isIn_index < 0){
-                        let observer = this.marketAnalysisDataApiService.getSingle(analysis.id);
-                        this.analysisUpdate.push(
-                            {
-                                id: analysis.id,
-                                obs: timer(10000, 10000)
-                                .pipe(
-                                    switchMap(data => observer)
-                                )
-                            }
-                        );
-                        this.analysisUpdate.find((item)=>item.id == analysis.id).obs.subscribe(
-                            (data) => {
-                                //Update the analysis
-                                console.log("Updating analysis...");
-                                this.store.dispatch(
-                                    new UpdateAnalysisDataItemAction(
-                                        {
-                                            id: "mk-" + data.id,
-                                            order: data.analysis.order_type == "BUY"?"buy":"sell",
-                                            position: data.analysis.position,
-                                            stopLoss: data.max_loss,
-                                            takeProfit: data.max_profit,
-                                            startTime: data.analysis.start_time,
-                                            endTime: data.analysis.end_time,
-                                            timeframe: data.analysis.timeframe,
-                                    
-                                            analysis: {
-                                                market: { devise: "" },
-                                                totalLot: data.total_lot,
-                                                availableLot: data.available_lot,
-                                                price: data.price,
-                                                published: true
-                                            }
-                                        }
-                                    )
-                                );
-                            }
-                        );
-                    }
-                }
-
-            }
-        )*/
-        //[END] subscribing market data
-    
-
-        //Handle service interaction
-
-        
-        //[START] handle order benefits update to update the amount
-        /*this.orderAmountService.getOrderAmountOberserver()
-        .subscribe(
-            (benefitsData) => {
-                console.log("Amoutn update got the benefits data form order change");
-                console.log("Amount update with order",  benefitsData);
-
-                let initialAmount = this.accountAmontManagerService.getLastStableAmount();
-                
-                let toAdd = 0;
-                if ( benefitsData.length > 0){
-                    for (let i = 0; i < benefitsData.length; i++) {
-                        const bd = benefitsData[i];
-
-                        if ( bd.benefit > 0 ){
-                        toAdd = toAdd + (bd.benefit + bd.amount);
-                        }else {
-                        toAdd += bd.benefit;
-                        }
-                        
-                    }
-
-                    console.log( "Our benefit : ", toAdd);
-                    console.log("Amount updated to ", initialAmount + toAdd);
-
-                    //UPdate the current amount
-                    this.accountAmontManagerService.updateAmount(
-                        toAdd,
-                        false //We areupdating with order benefits
-                    )
-                }
-
-            }
-        )*/
-        //[END]
-        
     }
 
 }

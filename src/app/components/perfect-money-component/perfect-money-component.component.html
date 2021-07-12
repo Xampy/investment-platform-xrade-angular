@@ -3,7 +3,7 @@
 
 
     <ng-container *ngIf="session!=null; else elseTemplate">
-        <div class="col-md-6" >
+        <div class="col-md-6 mx-auto" >
 
             <ng-container *ngIf="isGettingCheckout==true; else elseNotGettingCheckoutTemplate">
                 
@@ -25,7 +25,9 @@
 
                 <div class="card mb-4">
                     <div class="card-body">
-
+                       <div class="ùt-1 mb-1">
+                        <img src="assets/img/PerfectM.gif" height="30" alt="">
+                       </div>
                         <p>
                             Please click the button below to continue with your transaction.
                         </p>
@@ -56,7 +58,7 @@
     </ng-container>
     <ng-template #elseTemplate>
 
-        <div class="col-md-6 offset-md-6">
+        <div class="col-md-6 mx-auto">
             <div class="card mb-4">
                 <div class="card-body">
 

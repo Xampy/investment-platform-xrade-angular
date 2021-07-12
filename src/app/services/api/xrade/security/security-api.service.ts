@@ -22,7 +22,7 @@ export class SecurityApiService extends AbstractAPIRequest {
      */
     getMemberData(){
         let url = this.RESOURCE_BASE_PATH + `/data`;
-        return this.http.get<MemberLoginApiRequestOutputData>(
+        return this.http.get<{data: MemberLoginApiRequestOutputData}>(
             url,
             {
                 headers: this.requestHeaders
@@ -122,6 +122,22 @@ export class SecurityApiService extends AbstractAPIRequest {
             {
                 headers: this.requestHeaders,
                 params: new HttpParams().append("verification_token", verification_token).append("code", code)
+            }
+        ).pipe(
+            catchError(this.handleError)
+        )
+    }
+
+
+
+
+    updatePassword(data: {old_password: string, new_password: string}){
+        let url = this.RESOURCE_BASE_PATH + `/update/password`;
+        return this.http.post<any>(
+            url,
+            JSON.stringify(data),
+            {
+                headers: this.requestHeaders
             }
         ).pipe(
             catchError(this.handleError)

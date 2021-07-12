@@ -159,7 +159,7 @@ export class MakeDepositPageComponent implements OnInit {
                         this.isPaying = false;
                         this.toastsService.show("Error", error.error.message, { classname: 'bg-danger text-white' });     
                     }
-                )
+                );
         
         }else if(this.paymentMethod == "other"){
             //Init a deposit request here

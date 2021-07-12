@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { MemberLoginApiRequestOutputData } from 'src/app/share/types/api/member-api/member-login-api.type';
+import { SecurityApiService } from '../api/xrade/security/security-api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,19 +10,22 @@ export class AccountDataManagerService {
 
     member: MemberLoginApiRequestOutputData = null;
     memberSubject$: BehaviorSubject<MemberLoginApiRequestOutputData> = new BehaviorSubject(this.member);
-    constructor() { 
-        //We load the session storage data about he current member
-        //In case we dont have it it return null
-
-        setTimeout(() => {
-            this.member = JSON.parse(sessionStorage.getItem("member"));
-            if(this.member == null){
-                //Do something
-                
-            }else{
+    constructor(
+        private securityService: SecurityApiService
+    ) { 
+        this.securityService.getMemberData()
+        .subscribe(
+            (data) => {
+                console.log(data);
+                this.member = data.data;
                 this.memberSubject$.next(this.member);
             }
-        }, 1000 * 5);
+        )
+    }
+    
+    init(){
+        this.member = JSON.parse(sessionStorage.getItem("member"));
+        console.log("Loading user data");
         
     }
 
