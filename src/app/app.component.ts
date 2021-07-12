@@ -1,19 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, Event as RouterEvent, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Observable, timer } from 'rxjs';
-import { filter, switchMap } from 'rxjs/operators';
 import { AppService } from './app.service';
 import { LayoutService } from './layout/layout.service';
-import { AccountAmountManagerService } from './services/account/account-amount-manager.service';
-import { CandleInterface, Mt5ApiService } from './services/api/meta-trader/mt5-api.service';
-import { MarketAnalysisDataApiService } from './services/api/xrade/market-analysis-data/market-analysis-data-api.service';
-import { DefaultDeviseService } from './services/observers/devise/default-devise.service';
-import { OrderAccountAmountObserverService } from './services/observers/order/order-account-amount-observer.service';
-import { AnalysisApiRequestOutput } from './share/types/api/analysis-api/analysis-api.types';
-import { AddAnalysisDataItemAction, UpdateAnalysisDataItemAction } from './store/analysis/actions/analysis-data.action';
-import { AnalysisDataItem } from './store/analysis/models/analysis-data.model';
-import { AppState } from './store/models/app-state.model';
 
 @Component({
   selector: 'app-root',
@@ -26,14 +14,6 @@ export class AppComponent implements OnInit, OnDestroy {
         private router: Router, 
         private appService: AppService, 
         private layoutService: LayoutService,
-        
-        private store: Store<AppState>,
-        private observersDeviseService: DefaultDeviseService,
-        private orderAmountService: OrderAccountAmountObserverService,
-        private accountAmontManagerService: AccountAmountManagerService,
-
-        //Xrade API
-        private marketAnalysisDataApiService: MarketAnalysisDataApiService
 
     
         

@@ -1,0 +1,156 @@
+
+<h4 class="font-weight-bold py-3 mb-4">
+    Withdrawl request on {{ title}}
+    <div class="text-muted text-tiny mt-1"><small class="font-weight-normal">Today is {{ today }}</small></div>
+  </h4>
+
+<div class="row mt-5">
+    <div class="col-sm-6 col-xl-6 mt-3 mx-auto">  
+        <div class="card mb-4">
+            <div class="card-body">
+            <div class="d-flex align-items-center">
+                <div class="lnr lnr-earth display-4 text-info"></div>
+                <div class="ml-3 w-100">
+                <div class="small">{{ cardTitle }}</div>
+                <div class="text-large mt-3">
+                    <ng-container *ngIf="member != null; else elseMemberNullAmountTemplate">
+                    <h2>{{ accountAmount }} $</h2>
+                    </ng-container>
+                    <ng-template #elseMemberNullAmountTemplate>
+                    <h2>0 $</h2>
+                    </ng-template>                
+                </div>
+                <div class="text-large mt-3 w-100 text-right">
+                    <button class="btn" disabled></button>
+                    <button class="btn" disabled></button>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+        <div class="card mb-4" *ngIf="paymentMethod != null && paymentMethod != ''">
+            <div class="card-body">
+                <ng-container [ngSwitch]="paymentMethod">
+                    <div *ngSwitchCase="'btc'" >
+                        <label for="btc-address">BTC address <span class="text-danger text-dark">*</span> </label>
+                        <input style="border-top: none; border-left: none; border-right: none;" 
+                        type="text" id="btc-address" class="form-control w-100">
+                        <small class="text-muted">Specify your bitcoin address</small>
+                    </div>
+
+                    <div *ngSwitchCase="'perfect-money'" >
+                        <label for="btc-address">Perfect-Money <span class="text-danger text-dark">*</span> </label>
+                        <input style="border-top: none; border-left: none; border-right: none;" 
+                        type="text" id="perfect-money-address" class="form-control w-100">
+                        <small class="text-muted">Specify your perfect-money address</small>
+                    </div>
+    
+                    <div *ngSwitchCase="'credit-card'" >
+                        <label for="" style="color: black;" >Fill credit card data</label>
+                        <div style="display: flex; flex-direction: column; align-items: center;" class="mt-3">
+                            <div class="form-group" style="width: 300px; ">
+                                <input type="text" class="form-control"
+                                    placeholder="card number" 
+                                    id="card-number"
+                                    style="border-top: none; border-left: none; border-right: none;">
+                            </div>
+                            <div class="form-group mt-1" style="width: 300px; ">
+                                <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                                    <input type="text" class="form-control"
+                                        placeholder="MM/YY" 
+                                        id="exp"
+                                        style="border-top: none; border-left: none; border-right: none; width: 100px;">
+                                    <input type="text" class="form-control"
+                                        placeholder="CVC"
+                                        id="cvc"
+                                        style="border-top: none; border-left: none; border-right: none; width: 100px;">
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div *ngSwitchCase="'paypal'" >
+                        <label for="paypal">Paypal <span class="text-danger text-dark">*</span> </label>
+                        <input type="text" id="paypal" class="form-control w-100">
+                        <small class="text-muted">Specify your email address or phone number</small>
+                    </div>
+                    
+                </ng-container>
+            </div>
+            
+        </div>
+
+
+    </div>
+
+    <div class="col-sm-6 col-xl-6 mt-3 mx-auto">
+        <div class="card mb-4">
+            <div class="card-body">
+                
+
+                
+                <table class="table">
+                    <tbody>
+
+                        <tr>
+                            <td class="text-left text-muted">
+                                <label for="paymentMethod" class="text-black">Withdrawal method</label>
+                               <select name="paymentMethod" [(ngModel)]="paymentMethod" id="paymentMethod" class="form-control">
+                                    <option value="" selected>Choose a payment method</option>
+                                    <option value="btc">Bitcoin</option>
+                                   <option value="credit-card">Credit Card</option>
+                                   <option value="perfect-money">Perfect Money</option>
+                               </select>
+                            </td>
+                        </tr>
+
+                        <!--<tr>
+                            <td class="text-left text-muted">
+                                <label for="metadata">Add iformation or description to withdrawal request</label>
+                                <textarea [(ngModel)]="metadata" id="metadata" type="text" class="form-control w-100"></textarea>
+                            </td>
+                        </tr>-->
+                        
+                        <tr>
+                            <td class="text-left text-muted">
+                                <p>
+                                    <span class="text-muted">Set the amount in $</span>
+                                </p>
+                                <input [(ngModel)]="amount" type="number" class="form-control w-100" type="number" min="5"  max="{{ accountAmount}}" value="5">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="3">
+                                <ng-container *ngIf="canWithdrawal==true; else elseTemplate">
+                                    <ng-container *ngIf="isRequesting; else elseisNotRequestingTemplate">
+                                        <div class="mt-3" style="display: flex; flex-direction: column; justify-content: center; align-items: center">
+                                            <div class="spinner-border" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <h6 class="mt-3">Please wait...</h6>
+                                        </div>
+                                    </ng-container>
+                                    <ng-template #elseisNotRequestingTemplate>
+                                        <button *ngIf="paymentMethod.length >0 && amount > 0"  
+                                            (click)="requestWithdrawal()" 
+                                            class="connectBtn w-100" >Proceed request</button>
+                                    </ng-template>  
+                                </ng-container>
+                                <ng-template #elseTemplate>
+                                    <span class="text-danger">You need to have a minimum of 1 USD on your account</span>
+                                </ng-template>
+                                
+                                
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

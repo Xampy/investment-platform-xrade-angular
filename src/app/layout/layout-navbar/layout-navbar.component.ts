@@ -23,7 +23,7 @@ export class LayoutNavbarComponent implements OnInit{
     username: string = "";
     entryDateString = "";
     daysEleapsed: number = 0;
-
+    
     constructor(
         private router: Router,
         private appService: AppService, 

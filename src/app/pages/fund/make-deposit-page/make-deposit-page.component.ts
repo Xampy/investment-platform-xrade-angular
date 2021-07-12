@@ -32,6 +32,7 @@ export class MakeDepositPageComponent implements OnInit {
     isPaying: boolean = false;
     show: boolean = true;
     hasChoosedPaymentMethod: boolean = false;
+    today: Date = new Date();
 
     @Input()
     /**
@@ -130,7 +131,7 @@ export class MakeDepositPageComponent implements OnInit {
                     }
                 )*/
 
-                this.cardPaymentApiService.createSession({amount: this.amount, card_data: ""},)
+                /*this.cardPaymentApiService.createSession({amount: this.amount, card_data: ""},)
                 .subscribe(
                     (data: any) => {
                         console.log(data);
@@ -159,11 +160,11 @@ export class MakeDepositPageComponent implements OnInit {
                         this.isPaying = false;
                         this.toastsService.show("Error", error.error.message, { classname: 'bg-danger text-white' });     
                     }
-                );
+                );*/
         
         }else if(this.paymentMethod == "other"){
             //Init a deposit request here
-            this.isPaying = true;
+            /*this.isPaying = true;
             let depositRequest: MemberDepositApiRequestInput = new MemberDepositApiRequestInput();
             depositRequest.setAmount(10);
             depositRequest.setPayment("other");
@@ -196,7 +197,7 @@ export class MakeDepositPageComponent implements OnInit {
 
                    
                 }
-            )
+            )*/
 
         }
     }
@@ -213,16 +214,6 @@ export class MakeDepositPageComponent implements OnInit {
      */
     cancelPaymentMehod(event: any){
         this.hasChoosedPaymentMethod = false;
-    }
-
-    payWithCrypto(){
-
-       
-    }
-
-
-    payWithPerfectMoney(){
-
     }
 
 }

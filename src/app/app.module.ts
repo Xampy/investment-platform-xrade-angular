@@ -129,6 +129,7 @@ import { VerifyEmailComponent } from './pages/auth/verify-email/verify-email.com
 import { CreditCardComponentComponent } from './components/credit-card-component/credit-card-component.component';
 import { PerfectMoneyComponentComponent } from './components/perfect-money-component/perfect-money-component.component';
 import { PerfectMoneyService } from './services/api/xrade/payment/perfect-money/perfect-money.service';
+import { WithdrawalWidgetFormComponent } from './components/withdrawal-widget-form/withdrawal-widget-form.component';
 
 // *******************************************************************************
 //
@@ -169,6 +170,7 @@ import { PerfectMoneyService } from './services/api/xrade/payment/perfect-money/
     VerifyEmailComponent,
     CreditCardComponentComponent,
     PerfectMoneyComponentComponent,
+    WithdrawalWidgetFormComponent,
   ],
 
   imports: [

@@ -16,8 +16,8 @@ export class MemberWithdrawApiService extends AbstractAPIRequest {
         super(environment.XRADE_API_BASE_URL, "member/fund");
     }
 
-    createWithdrawRequest(input: MemberDepositApiRequestInputInterface){
-        let url = this.RESOURCE_BASE_PATH + `/withdrawal`;
+    createWithdrawRequest(input: {amount: number, payment: string, metadata: string}){
+        let url = this.RESOURCE_BASE_PATH + `/investment/withdrawal`;
         return this.http.post(
             url,
             JSON.stringify(input),
