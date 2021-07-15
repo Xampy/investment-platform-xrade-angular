@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { AbstractAPIRequest } from 'src/app/share/request/abstract-api-request.class';
 import { MemberDepositApiRequestInputInterface } from 'src/app/share/types/api/deposit/deposit-api.types';
+import { MemberWithdrawalHistoryRowInterface } from 'src/app/share/types/api/withdraw-api/withdraw-api.types';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -27,5 +28,17 @@ export class MemberWithdrawApiService extends AbstractAPIRequest {
         ).pipe(
             catchError(this.handleError)
         )
+    }
+
+    getHistory(){
+        let url = this.RESOURCE_BASE_PATH + `/withdrawal/history`;
+        return this.http.get<MemberWithdrawalHistoryRowInterface[]>(
+            url,
+            {
+                headers: this.requestHeaders
+            }
+        ).pipe(
+            catchError(this.handleError)
+        );
     }
 }

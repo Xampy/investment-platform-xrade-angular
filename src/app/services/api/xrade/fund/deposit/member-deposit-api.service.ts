@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { AbstractAPIRequest } from 'src/app/share/request/abstract-api-request.class';
-import { MemberDepositApiRequestInputInterface } from 'src/app/share/types/api/deposit/deposit-api.types';
+import { MemberDepositApiRequestInputInterface, MemberDepositHistoryRowInterface } from 'src/app/share/types/api/deposit/deposit-api.types';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -27,5 +27,18 @@ export class MemberDepositApiService extends AbstractAPIRequest {
         ).pipe(
             catchError(this.handleError)
         )
+    }
+
+
+    getHistory(){
+        let url = this.RESOURCE_BASE_PATH + `/deposit/history`;
+        return this.http.get<MemberDepositHistoryRowInterface[]>(
+            url,
+            {
+                headers: this.requestHeaders
+            }
+        ).pipe(
+            catchError(this.handleError)
+        );
     }
 }

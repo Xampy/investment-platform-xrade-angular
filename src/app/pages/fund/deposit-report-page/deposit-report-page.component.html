@@ -29,8 +29,14 @@
 
                                 <div class="card mb-4">
                                     <div class="card-body">
+                                        <div class="mt-2">
+                                            <p>
+                                                Total : {{ requests.length }}
+                                            </p>
+                                        </div>
                                         <div class="d-flex align-items-center">
-                                            <table class="table mt-2">
+                                            
+                                            <table class="table mt-1">
                                                 <thead>
                                                     <tr>
                                                         <th>Id</th>
@@ -43,42 +49,28 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>Id</td>
-                                                        <td>2021-05-12 18:56</td>
-                                                        <td>50 $</td>
-                                                        <td>1.5$</td>
-                                                        <td>51.05 $</td>
+                                                    <tr *ngFor="let item of requests; let i = index">
+                                                        <td>#{{ i + 1 }}</td>
+                                                        <td>{{ item.date }}</td>
+                                                        <td>{{ item.amount_before }}$</td>
+                                                        <td>{{ item.amount }}$</td>
+                                                        <td>{{ item.amount_after }}$</td>
                                                         <td>
-                                                            <span class="badge badge-success">Filled</span>
-                                                        </td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Id</td>
-                                                        <td>2021-05-12 18:56</td>
-                                                        <td>50 $</td>
-                                                        <td>1.5$</td>
-                                                        <td>51.05 $</td>
-                                                        <td>
-                                                            <span class="badge badge-success">Filled</span>
-                                                        </td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Id</td>
-                                                        <td>2021-05-12 18:56</td>
-                                                        <td>50 $</td>
-                                                        <td>1.5$</td>
-                                                        <td>51.05 $</td>
-                                                        <td>
-                                                            <span class="badge badge-success">Filled</span>
+                                                            <ng-container *ngIf="item.filled == true; else elseTemplate">
+                                                                <span class="badge badge-success rounded-pill">Filled</span>
+                                                            </ng-container>
+                                                            <ng-template #elseTemplate>
+                                                                <span class="badge badge-danger rounded-pill">UnFilled</span>
+                                                            </ng-template>
+                                                            
+                                                            
                                                         </td>
                                                         <td></td>
                                                     </tr>
 
                                                 </tbody>
                                             </table>
+                                                
                                         </div>
                                     </div>
                                 </div>

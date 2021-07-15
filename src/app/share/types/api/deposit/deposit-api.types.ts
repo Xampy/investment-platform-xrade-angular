@@ -27,6 +27,15 @@ export class CreditCardItem implements CreditCardInterface {
 }
 
 
+export interface MemberDepositHistoryRowInterface {
+    date: string,
+    amount: number,
+    amount_after: number,
+    payment: string,
+    filled: boolean,
+    amount_before: number
+}
+
 export interface MemberDepositApiRequestInputInterface {
     member_account_id: number,
     payment: string,

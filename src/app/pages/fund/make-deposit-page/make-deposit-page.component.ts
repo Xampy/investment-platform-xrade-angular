@@ -88,7 +88,7 @@ export class MakeDepositPageComponent implements OnInit {
                     this.isPaying = true;
                     //Check if we have a card_payment in session storage
                     let session:string = sessionStorage.getItem("card_payment_token");
-                    if(session != null){
+                    if(session != null && session.length > 0){
                         this.cardPaymentApiService.checkSessionPaymentStatus({session: session})
                         .subscribe(
                             (data) => {

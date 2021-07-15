@@ -46,7 +46,7 @@ export class CreditCardComponentComponent implements OnInit {
                 .subscribe(
                     (data: any) => {
                         console.log(data);
-                        this.isPaying = false;
+                        //this.isPaying = false;
                         this.toastsService.show(
                             "Success",
                             "Redirecting to Checkout page",

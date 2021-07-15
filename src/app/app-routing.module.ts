@@ -36,6 +36,7 @@ import { SponsorshipProfitWithdrawalComponent } from './pages/fund/sponsorship-p
 import { SponsorshipProfitMergeComponent } from './pages/fund/sponsorship-profit-merge/sponsorship-profit-merge.component';
 import { InvitePageComponent } from './pages/team/invite-page/invite-page.component';
 import { VerifyEmailComponent } from './pages/auth/verify-email/verify-email.component';
+import { WithdrawReportPageComponent } from './pages/withdraw/withdraw-report-page/withdraw-report-page.component';
 
 // *******************************************************************************
 // Routes
@@ -69,6 +70,7 @@ const routes: Routes = [
             { path: 'deposit', component:  MakeDepositPageComponent , pathMatch: 'full' },
             { path: 'deposit-report', component:  DepositReportPageComponent , pathMatch: 'full' }, 
             { path: 'withdrawal', component:  MakeWithdrawRequestPageComponent , pathMatch: 'full' },
+            { path: 'withdrawal-report', component:  WithdrawReportPageComponent , pathMatch: 'full' },
             { path: 'investment-profit', children: [ 
                 { path:'withdrawal', component: InvestmentProfitWithdrawalComponent, pathMatch: 'full'},
                 { path:'merge', component: InvestmentProfitMergeComponent, pathMatch: 'full'}

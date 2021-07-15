@@ -1,5 +1,12 @@
 
-
+export interface MemberWithdrawalHistoryRowInterface {
+    date: string,
+    amount: number,
+    amount_after: number,
+    payment: string,
+    filled: boolean,
+    amount_before: number
+}
 export interface MemberWithdrawApiRequestInputInterface {
     member_account_id: number,
     payment: string,
@@ -20,31 +27,31 @@ export class MemberWithdrawApiRequestInput implements MemberWithdrawApiRequestIn
     metadata: string;
     filled: boolean;
     date: string;
-    
-    constructor(){
+
+    constructor() {
         this.member_account_id = 0; //This is not used by the server
         this.payment = " ";
-        this.amount = 0 ;
-        this.amount_after = 0 ;
-        this.amount_before = 0 ;
+        this.amount = 0;
+        this.amount_after = 0;
+        this.amount_before = 0;
         this.metadata = " ";
         this.filled = false;
-        this.date =  " ";
+        this.date = " ";
     }
 
     setAmount(amount: number) {
-        if(amount <= 0){
+        if (amount <= 0) {
             throw new Error("Insufficent amount");
-        }else{
+        } else {
             this.amount = amount;
         }
     }
 
-    setPayment(data: string){
+    setPayment(data: string) {
         this.payment = data;
     }
 
-    setMetadata(data: string){
+    setMetadata(data: string) {
         this.metadata = data;
     }
 }
