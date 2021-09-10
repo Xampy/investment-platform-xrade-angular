@@ -26,9 +26,6 @@ export class HomePageComponent implements OnInit, AfterViewInit {
         )
     }
     ngAfterViewInit(): void {
-        
-
-
         var mybutton = document.getElementById("myBtn");
         var homeMenu = document.getElementById("home-menu");
         var menuLinks = document.querySelectorAll(".link-data-item a");
@@ -57,9 +54,6 @@ export class HomePageComponent implements OnInit, AfterViewInit {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
         }
-
-
-
     }
 
     ngOnInit(): void {
