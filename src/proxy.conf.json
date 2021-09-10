@@ -1,7 +1,7 @@
 {
     
-    "/xrade/api/v1/*": {
-        "target": "http://localhost:8080",
+    "/api/v1/*": {
+        "target": "http://31.170.165.180:8080/api-blueship",
         "secure": false,
 
         "debug": true

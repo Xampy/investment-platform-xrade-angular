@@ -77,7 +77,7 @@ export class LoginPageComponent implements OnInit {
                         this.amountManagerService.updateAmount(data.data.account.amount, false);
                         this.toastsService.show("Success", 
                         "Sucessfully Log in... Please wait", { classname: 'bg-success text-white' });
-                        this.router.navigate([ '/member', 'dashboard']);
+                        this.router.navigate([ '/member', 'dashboard']).then((val) => {if(val) setTimeout( () => { location.reload() }, 3000)} ) ;
                     }
 
 

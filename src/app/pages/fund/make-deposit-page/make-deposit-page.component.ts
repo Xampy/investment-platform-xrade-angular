@@ -111,7 +111,7 @@ export class MakeDepositPageComponent implements OnInit {
                 if(params["PAYMENT_BATCH_NUM"] == "0"){
                     this.toastsService.show(
                         "Error", 
-                        "Your deposit has been cancelled or an error has occured. Please try agin later", 
+                        "Your deposit has been cancelled or an error has occured. Please try again later", 
                         { classname: 'bg-danger text-white' });
                 }
             }

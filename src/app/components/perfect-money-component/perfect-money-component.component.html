@@ -31,13 +31,15 @@
                         <p>
                             Please click the button below to continue with your transaction.
                         </p>
+                        <!-- value="http://localhost:8080/xrade/api/v1/fill-account/deposit/perfect-money/check"> -->
+                        <!-- alue="http://localhost:4200/member/fund/deposit?status=1">-->
                         <form class="w-100" action="https://perfectmoney.is/api/step1.asp" method="POST" id="perfect-money-form">
                             <input type="hidden" name="PAYEE_ACCOUNT" value="U29385398">
                             <input type="hidden" name="PAYEE_NAME" value="BlueShip LLC USD">
                             <input type="hidden" name="PAYMENT_AMOUNT" [value]="amount">
                             <input type="hidden" name="PAYMENT_UNITS" value="USD">
                             <input type="hidden" name="PAYMENT_ID" [value]="session.payment_id">
-                            <input type="hidden" name="STATUS_URL" value="http://localhost:8080/xrade/api/v1/fill-account/deposit/perfect-money/check">
+                            <input type="hidden" name="STATUS_URL" value="http://31.170.165.180:8080/api-blueship/api/v1/fill-account/deposit/perfect-money/check">
                             <input type="hidden" name="PAYMENT_URL" value="http://localhost:4200/member/fund/deposit?status=1">
                             <input type="hidden" name="PAYMENT_URL_METHOD" value="GET">
                             <input type="hidden" name="NOPAYMENT_URL" value="http://localhost:4200/member/fund/deposit?status=0">
