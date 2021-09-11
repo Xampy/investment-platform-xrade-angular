@@ -130,6 +130,7 @@ import { CreditCardComponentComponent } from './components/credit-card-component
 import { PerfectMoneyComponentComponent } from './components/perfect-money-component/perfect-money-component.component';
 import { PerfectMoneyService } from './services/api/xrade/payment/perfect-money/perfect-money.service';
 import { WithdrawalWidgetFormComponent } from './components/withdrawal-widget-form/withdrawal-widget-form.component';
+import { APP_BASE_HREF } from '@angular/common';
 
 // *******************************************************************************
 //
@@ -268,8 +269,11 @@ import { WithdrawalWidgetFormComponent } from './components/withdrawal-widget-fo
     
 
 
-     //Interceptors
+    //Interceptors
      httpInterceptorProviders,
+
+    //Base href
+    {provide: APP_BASE_HREF, useValue: "/blueship-invest"},
 
      //Custom Validators
      AsyncMemberReferenceValidator

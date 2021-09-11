@@ -36,7 +36,7 @@
                                 type="text"
                                 class="from-control"
                                 name="email"
-                                placeholder="code tel"
+                                placeholder="email"
                                 formControlName="email">
                             <div class="text-danger mt-1 pt-2" style="display: column;" 
                                 *ngIf="signinForm.get('email').invalid && (signinForm.get('email').dirty || signinForm.get('email').touched) ">
@@ -64,7 +64,7 @@
                                     <li *ngIf="signinForm.get('password').errors.required" >
                                        Password is required
                                     </li>
-                                    <li *ngIf="signinForm.get('password').errors.minLength" >
+                                    <li *ngIf="signinForm.get('password').errors.minlength" >
                                         Password minimum length is 4
                                     </li>
                                 </ul>
