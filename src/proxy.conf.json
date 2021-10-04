@@ -1,9 +1,10 @@
 {
     
     "/api/v1/*": {
-        "target": "http://31.170.165.180:8080/api-blueship",
+        "target": "http://api.blueship-invest.com",
         "secure": false,
-
-        "debug": true
+        "pathRewrite": { "^/api/v1": "v1" },
+        "logLevel": "debug",
+        "changeOrigin": true 
     }
 }

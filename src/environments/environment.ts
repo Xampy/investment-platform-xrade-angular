@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   META_TRADER_5_API_BASE_URL: "http://localhost:5000/api-xrade-metatrader-5/volaility-75-index",
-  XRADE_API_BASE_URL:  "http://localhost:4200/api/v1",  //Need to change it on deployment
+  XRADE_API_BASE_URL:  "http://localhost:4200/api/v1",   //Need to change it on deployment
 };
 
 /*
